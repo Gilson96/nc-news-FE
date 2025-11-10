@@ -1,11 +1,16 @@
 import FiltersTopics from "./filters_topic";
 import FiltersSort from "./filters_sort";
+import type { HomeProps } from "./home";
 
-const Filters = () => {
+export type FiltersProps = {
+  setFilters: React.Dispatch<React.SetStateAction<HomeProps>>;
+};
+
+const Filters = ({ setFilters }: FiltersProps) => {
   return (
-    <section className="flex w-full items-center justify-between p-[2%] border-b">
-      <FiltersTopics />
-      <FiltersSort />
+    <section className="flex w-full items-center justify-between border-b p-[2%]">
+      <FiltersTopics setFilters={setFilters} />
+      <FiltersSort setFilters={setFilters} />
     </section>
   );
 };
