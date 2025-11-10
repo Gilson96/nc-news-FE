@@ -10,3 +10,10 @@ export interface Article {
 }
 
 export type Articles = Article[];
+
+export interface Topic {
+    slug: string,
+    description: string
+}
+
+export type Topics = Topic[];
