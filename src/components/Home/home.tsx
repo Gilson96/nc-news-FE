@@ -3,15 +3,15 @@ import Articles from "../Article/articles";
 import Filters from "./filters";
 
 export type HomeProps = {
-  created_at: string;
-  comments: string;
+  sort_by: string;
+  order: string;
   topic: string;
 };
 
 const Home = () => {
   const [filters, setFilters] = useState({
-    created_at: "DESC",
-    comments: "DESC",
+    sort_by: "created_at",
+    order: "DESC",
     topic: "All",
   });
 
@@ -19,8 +19,8 @@ const Home = () => {
     <main className="mt-8 flex h-full w-full flex-col items-center justify-center rounded-lg border">
       <Filters setFilters={setFilters} />
       <Articles
-        created_at={filters.created_at}
-        comments={filters.comments}
+        sort_by={filters.sort_by}
+        order={filters.order}
         topic={filters.topic}
       />
     </main>

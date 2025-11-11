@@ -18,27 +18,49 @@ const FiltersSort = ({ setFilters }: FiltersProps) => {
         <DropdownMenuLabel>Sort by</DropdownMenuLabel>
         <DropdownMenuItem
           onClick={() =>
-            setFilters((prev) => ({ ...prev, created_at: "DESC" }))
+            setFilters((prev) => ({
+              ...prev,
+              sort_by: "created_at",
+              order: "DESC",
+            }))
           }
           className="flex cursor-pointer items-center justify-between"
         >
           <span>Newest</span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setFilters((prev) => ({ ...prev, created_at: "ASC" }))}
+          onClick={() =>
+            setFilters((prev) => ({
+              ...prev,
+              sort_by: "created_at",
+              order: "ASC",
+            }))
+          }
           className="flex cursor-pointer items-center justify-between"
         >
           <span>Oldest</span>
         </DropdownMenuItem>
         <hr className="h-[0.2px] bg-gray-200" />
         <DropdownMenuItem
-          onClick={() => setFilters((prev) => ({ ...prev, comments: "DESC" }))}
+          onClick={() =>
+            setFilters((prev) => ({
+              ...prev,
+              sort_by: "count",
+              order: "DESC",
+            }))
+          }
           className="flex cursor-pointer items-center justify-between"
         >
           <span>More comments</span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setFilters((prev) => ({ ...prev, comments: "ASC" }))}
+          onClick={() =>
+            setFilters((prev) => ({
+              ...prev,
+              sort_by: "count",
+              order: "ASC",
+            }))
+          }
           className="flex cursor-pointer items-center justify-between"
         >
           <span>Less comments</span>

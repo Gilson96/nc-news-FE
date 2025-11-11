@@ -6,17 +6,15 @@ import { ArrowBigUpDash, MessageCircle, User2 } from "lucide-react";
 import type { HomeProps } from "../Home/home";
 import { Link } from "react-router";
 
-const Article = ({ created_at, topic, comments }: HomeProps) => {
+const Article = ({ sort_by, topic, order }: HomeProps) => {
   const [articles, setArticles] = useState<Articles>();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(created_at);
-  console.log(topic);
-  console.log(comments);
-
   useEffect(() => {
     axios
-      .get("https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles")
+      .get(
+        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?sort_by=${sort_by}&order=${order}${topic === "all" ? "" : `&topic=${topic}`}`,
+      )
       .then(function (response) {
         setArticles(response.data);
         setIsLoading(false);
@@ -24,7 +22,7 @@ const Article = ({ created_at, topic, comments }: HomeProps) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [sort_by, topic, order]);
 
   return (
     <main className="flex w-full flex-col p-[2%]">

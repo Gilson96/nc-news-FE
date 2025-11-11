@@ -33,7 +33,7 @@ const FiltersTopics = ({ setFilters }: FiltersProps) => {
             onClick={() => {
               setFilters((prev) => ({ ...prev, topic: "all" }));
             }}
-            className="flex w-20 items-center justify-center rounded border px-[3%] py-[1%] capitalize"
+            className="flex w-20 cursor-pointer items-center justify-center rounded border px-[3%] py-[1%] capitalize hover:bg-gray-100 focus:bg-gray-100"
           >
             All
           </button>
@@ -42,7 +42,7 @@ const FiltersTopics = ({ setFilters }: FiltersProps) => {
               onClick={() => {
                 setFilters((prev) => ({ ...prev, topic: topic.slug }));
               }}
-              className="flex w-20 items-center justify-center rounded border px-[3%] py-[1%] capitalize"
+              className="flex w-20 cursor-pointer items-center justify-center rounded border px-[3%] py-[1%] capitalize hover:bg-gray-100 focus:bg-gray-100"
             >
               {topic.slug}
             </button>
