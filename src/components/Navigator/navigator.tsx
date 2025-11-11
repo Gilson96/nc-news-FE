@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import Menu from "./menu";
+import { Link } from "react-router";
 
 const Navigator = () => {
   return (
@@ -8,7 +9,7 @@ const Navigator = () => {
         <span>
           <Menu />
         </span>
-        <p>Logo</p>
+        <Link to={"/"}>Logo</Link>
       </div>
 
       <div className="flex w-[50%] items-center gap-[0.5rem] rounded-full border px-[2%] py-[1%]">
