@@ -12,9 +12,9 @@ const FiltersSort = ({ setFilters }: FiltersProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <SlidersHorizontal className="cursor-pointer" />
+        <SlidersHorizontal className="cursor-pointer text-white" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative right-[20%] bg-white">
+      <DropdownMenuContent className="relative right-[20%] bg-white md:right-[30%]">
         <DropdownMenuLabel>Sort by</DropdownMenuLabel>
         <DropdownMenuItem
           onClick={() =>

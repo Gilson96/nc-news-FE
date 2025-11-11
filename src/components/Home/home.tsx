@@ -12,11 +12,11 @@ const Home = () => {
   const [filters, setFilters] = useState({
     sort_by: "created_at",
     order: "DESC",
-    topic: "All",
+    topic: "all",
   });
 
   return (
-    <main className="mt-8 flex h-full w-full flex-col items-center justify-center rounded-lg border">
+    <main className="mt-8 flex h-full w-full flex-col items-center justify-center rounded-lg border md:w-[60%] md:place-self-center">
       <Filters setFilters={setFilters} />
       <Articles
         sort_by={filters.sort_by}

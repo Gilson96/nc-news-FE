@@ -1,6 +1,5 @@
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
@@ -13,19 +12,13 @@ const Menu = () => {
   return (
     <Drawer direction="left">
       <DrawerTrigger>
-        <MenuSquare size={30}/>
+        <MenuSquare size={30} />
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Are you absolutely sure?</DrawerTitle>
           <DrawerDescription>This action cannot be undone.</DrawerDescription>
         </DrawerHeader>
-        {/* <DrawerFooter>
-          </DrawerClose>
-          <Button>Submit</Button>
-          <DrawerClose>
-          <Button variant="outline">Cancel</Button>
-          </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   );

@@ -8,7 +8,7 @@ export type FiltersProps = {
 
 const Filters = ({ setFilters }: FiltersProps) => {
   return (
-    <section className="flex w-full items-center justify-between border-b p-[2%]">
+    <section className="flex w-full items-center justify-between border-b p-[2%] bg-sky-700 rounded-t-lg">
       <FiltersTopics setFilters={setFilters} />
       <FiltersSort setFilters={setFilters} />
     </section>
