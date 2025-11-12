@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import type { ArticleObj, Users } from "../../utils/dataTypes";
+import type { ArticleObj } from "../../utils/dataTypes";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import { useParams } from "react-router";
 import Comments from "./comments";
 import InfoButtons from "../ui/infoButtons";
+import Authors from "./authors";
 
 const ArticleById = () => {
   const [article, setArticle] = useState<ArticleObj>();
   const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
-  const [user, setUser] = useState<Users>();
   const [isArticleLoading, setIsArticleLoading] = useState(true);
-  const [isUserLoading, setIsUserLoading] = useState(true);
   const articleId = useParams();
 
   useEffect(() => {
@@ -26,36 +25,12 @@ const ArticleById = () => {
       .catch(function (error) {
         console.log(error);
       });
-    axios
-      .get(`https://nc-news-api-99f5fdc34977.herokuapp.com/api/users`)
-      .then(function (response) {
-        setUser(response.data);
-        setIsUserLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }, [updatedArticlesVotes]);
-
-  console.log(updatedArticlesVotes);
-  const findUserImage = user?.find(
-    (u) => u.username === article?.article.author,
-  )?.avatar_url;
 
   return (
     <article className="flex w-full flex-col px-[3%] pt-[4%]">
       <div className="flex items-center gap-1">
-        {isUserLoading ? (
-          <span
-            className={`animate h-8 w-8 animate-pulse rounded-full bg-gray-300`}
-          ></span>
-        ) : (
-          <img
-            className={`h-8 w-8 rounded-full`}
-            src={findUserImage}
-            alt="user avatar"
-          />
-        )}
+        <Authors article_author={article?.article.author} />
         <p
           className={`${isArticleLoading && "animate h-4 w-12 animate-pulse bg-gray-300"}`}
         >
