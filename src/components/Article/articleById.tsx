@@ -8,6 +8,7 @@ import InfoButtons from "../ui/infoButtons";
 
 const ArticleById = () => {
   const [article, setArticle] = useState<ArticleObj>();
+  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
   const [user, setUser] = useState<Users>();
   const [isArticleLoading, setIsArticleLoading] = useState(true);
   const [isUserLoading, setIsUserLoading] = useState(true);
@@ -34,8 +35,9 @@ const ArticleById = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [updatedArticlesVotes]);
 
+  console.log(updatedArticlesVotes);
   const findUserImage = user?.find(
     (u) => u.username === article?.article.author,
   )?.avatar_url;
@@ -87,6 +89,8 @@ const ArticleById = () => {
 
         <div className="flex w-full items-center justify-start gap-3 border-b py-[2%] text-sm">
           <InfoButtons
+            setUpdatedArticlesVotes={setUpdatedArticlesVotes}
+            articleId={article === undefined ? 0 : article?.article.article_id}
             author={article === undefined ? "n/a" : article?.article.author}
             count={article === undefined ? 0 : article?.article.count}
             votes={article === undefined ? 0 : article?.article.votes}
