@@ -12,8 +12,8 @@ export interface Article {
 export type Articles = Article[];
 
 export type ArticleObj = {
-    article: Article
-}
+    article: Article,
+} | undefined
 
 export interface User {
     username: string,
