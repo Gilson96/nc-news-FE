@@ -28,11 +28,11 @@ const Authors = ({ article_author }: AuthorsProps) => {
 
   return isLoading ? (
     <span
-      className={`animate h-8 w-8 animate-pulse rounded-full bg-gray-300`}
+      className={`animate h-8 w-8 animate-pulse rounded-full border bg-gray-300`}
     ></span>
   ) : (
     <img
-      className={`h-8 w-8 rounded-full`}
+      className={`h-8 w-8 rounded-full border`}
       src={findUserImage}
       alt="user avatar"
     />

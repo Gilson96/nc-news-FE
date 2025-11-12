@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Navigator = () => {
   return (
-    <main className="flex h-12 w-full items-center justify-between border-b bg-white px-[3%] py-[6%] shadow md:py-[3%]">
+    <main className="flex h-12 w-full items-center justify-between border-b bg-white px-[3%] py-[6%] md:py-[3%]">
       <div className="flex items-center gap-2">
         <Menu />
         <Link className="text-xl font-bold text-sky-700" to={"/"}>

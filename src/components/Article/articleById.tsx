@@ -28,7 +28,7 @@ const ArticleById = () => {
   }, [updatedArticlesVotes]);
 
   return (
-    <article className="flex w-full flex-col px-[3%] pt-[4%]">
+    <article className="flex w-full flex-col px-[3%] pt-[4%] bg-white">
       <div className="flex items-center gap-1">
         <Authors article_author={article?.article.author} />
         <p
