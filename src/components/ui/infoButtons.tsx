@@ -36,6 +36,7 @@ const InfoButtons = ({
       </p>
       <p className="flex items-center justify-center gap-1 rounded-full border px-[4%] py-[2%]">
         <ArrowBigUpDash
+          className="cursor-pointer hover:fill-sky-700 hover:text-sky-700"
           onClick={() => {
             axios
               .patch(
@@ -53,6 +54,7 @@ const InfoButtons = ({
         />
         <span>|</span>
         <ArrowBigDownDash
+          className="cursor-pointer hover:fill-sky-700 hover:text-sky-700"
           onClick={() => {
             axios
               .patch(
