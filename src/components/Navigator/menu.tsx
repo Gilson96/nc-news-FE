@@ -6,15 +6,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
-import { MenuSquare } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 
 const Menu = () => {
   return (
     <Drawer direction="left">
       <DrawerTrigger>
-        <MenuSquare size={30} />
+        <MenuIcon size={20} color={`oklch(50% 0.134 242.749)`} cursor={"pointer"} />
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent style={{width: `${12}rem`}}>
         <DrawerHeader>
           <DrawerTitle>Are you absolutely sure?</DrawerTitle>
           <DrawerDescription>This action cannot be undone.</DrawerDescription>
