@@ -9,6 +9,7 @@ import InfoButtons from "../ui/infoButtons";
 
 const Article = ({ sort_by, topic, order }: HomeProps) => {
   const [articles, setArticles] = useState<Articles>();
+  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,10 +24,10 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [sort_by, topic, order]);
+  }, [updatedArticlesVotes, sort_by, topic, order]);
 
   return (
-    <main className="flex w-full flex-col p-[2%]">
+    <main className="flex w-full flex-col bg-white p-[2%]">
       {isLoading ? (
         <Loader2 className="animate animate-spin" />
       ) : (
@@ -34,8 +35,10 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
           <article className="flex w-full flex-col border-b p-[2%]">
             <Link to={`/article/${article.article_id}`}>
               <div className="flex w-full items-start justify-between lg:flex-col lg:items-center lg:justify-center">
-                <div className="lg:pb-2 max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between">
-                  <h1 className="text-lg w-[80%] font-medium">{article.title}</h1>
+                <div className="max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pb-2">
+                  <h1 className="w-[80%] text-lg font-medium">
+                    {article.title}
+                  </h1>
                   <p className="">{dateOnlyFormat(article.created_at)}</p>
                 </div>
                 <div className="w-[30%] lg:w-full">
@@ -51,6 +54,8 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
                   </p>
                   <div className="flex w-full items-center justify-end gap-3 text-sm lg:justify-start lg:py-[2%]">
                     <InfoButtons
+                      articleId={article.article_id}
+                      setUpdatedArticlesVotes={setUpdatedArticlesVotes}
                       author={article.author}
                       count={article.count}
                       votes={article.votes}
