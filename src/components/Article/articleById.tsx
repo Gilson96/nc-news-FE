@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import type { ArticleObj } from "../../utils/dataTypes";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import { useParams } from "react-router";
-import Comments from "./comments";
+import Comments from "../Comments/comments";
 import InfoButtons from "../ui/infoButtons";
 import Authors from "./authors";
 
