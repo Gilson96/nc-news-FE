@@ -5,13 +5,23 @@ import { Link, useLocation } from "react-router";
 import { Loader2 } from "lucide-react";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import InfoButtons from "../ui/infoButtons";
+import Four0FourError from "../ErrorHandling/four0FourError";
 
+interface LocationState {
+  search: "?topic=coding" | "?topic=cooking" | "?topic=football";
+}
 const Topic = () => {
   const [articleTopics, setArticleTopics] = useState<Articles>();
   const [isLoading, setIsLoading] = useState(true);
   const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
-  const { search } = useLocation();
+  const { search } = useLocation() as LocationState;
 
+  const allowedSearch = ["?topic=coding", "?topic=cooking", "?topic=football"];
+
+  if (!allowedSearch.includes(search)) {
+    return <Four0FourError />;
+  }
+  
   useEffect(() => {
     axios
       .get(
