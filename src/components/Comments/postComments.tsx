@@ -56,6 +56,8 @@ const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
                 setInputValue(e.target.value);
               }}
               value={inputValue}
+              required
+              minLength={2}
               className="w-full outline-white"
               placeholder="Add new comment..."
             />
