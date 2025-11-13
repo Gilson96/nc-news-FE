@@ -15,7 +15,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
   useEffect(() => {
     axios
       .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?sort_by=${sort_by}&order=${order}${topic === "all" ? "" : `&topic=${topic}`}`,
+        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?sort_by=${sort_by}&order=${order}`,
       )
       .then(function (response) {
         setArticles(response.data);
