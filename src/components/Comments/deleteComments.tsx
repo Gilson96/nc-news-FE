@@ -29,7 +29,7 @@ const DeleteComments = ({
       .delete(
         `https://nc-news-api-99f5fdc34977.herokuapp.com/api/comments/${commentId}`,
       )
-      .then((response) => {
+      .then(() => {
         toast("Your comment was sucessfully deleted", {});
         setSuccessDelete(true);
       })

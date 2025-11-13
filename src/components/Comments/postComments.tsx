@@ -26,7 +26,7 @@ const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
         `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}/comments`,
         newComment,
       )
-      .then((response) => {
+      .then(() => {
         setOpenTextArea(false);
         toast("Your comment was sucessfully added", {});
       })

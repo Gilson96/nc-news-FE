@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import type { ArticleObj } from "../../utils/dataTypes";
 import { dateOnlyFormat } from "../../utils/timeFormat";
-import { Navigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Comments from "../Comments/comments";
 import InfoButtons from "../ui/infoButtons";
 import Authors from "./authors";
