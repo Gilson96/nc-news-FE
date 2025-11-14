@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import FiltersSort from "./filters_sort";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
+import { Ellipsis, EllipsisVertical } from "lucide-react";
+import PostArticle from "../Article/postArticle";
 
 export type FiltersProps = {
   setFilters: React.Dispatch<React.SetStateAction<HomeProps>>;
@@ -9,7 +11,7 @@ export type FiltersProps = {
 
 const Filters = ({ setFilters }: FiltersProps) => {
   return (
-    <section className="flex w-full items-center justify-between border-b bg-white p-[2%]  lg:w-[60%] lg:h-full lg:flex-col lg:items-start lg:justify-start lg:gap-5 lg:border lg:px-[2%] lg:py-[1%]">
+    <section className="flex w-full items-center justify-between border-b bg-white p-[2%] lg:h-full lg:w-[60%] lg:flex-col lg:items-start lg:justify-start lg:gap-5 lg:border lg:px-[2%] lg:py-[1%]">
       <div className="p-[2%] lg:flex lg:flex-col lg:items-start lg:gap-2">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
           Topics
@@ -35,7 +37,10 @@ const Filters = ({ setFilters }: FiltersProps) => {
           </Link>
         </span>
       </div>
-      <FiltersSort setFilters={setFilters} />
+      <span className="flex items-center gap-1 lg:hidden">
+        <FiltersSort setFilters={setFilters} />
+        <PostArticle />
+      </span>
       <div className="max-lg:hidden lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2 lg:p-[2%]">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
           Sort by

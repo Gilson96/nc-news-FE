@@ -67,7 +67,7 @@ const ArticleById = () => {
               ></span>
             ) : (
               <img
-                className={`h-60 md:h-80 w-full rounded-xl lg:h-80`}
+                className={`h-60 w-full rounded-xl md:h-80 lg:h-80`}
                 src={article?.article.article_img_url}
                 alt="user avatar"
               />
@@ -90,7 +90,7 @@ const ArticleById = () => {
             </span>
           </div>
         </span>
-        <span className="lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[6%] lg:pl-[3%] lg:pr-[2%]">
+        <span className="lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[6%] lg:pr-[2%] lg:pl-[3%]">
           <Comments articleId={Number(articleId.article_id)} />
         </span>
       </article>

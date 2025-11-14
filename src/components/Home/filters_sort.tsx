@@ -12,7 +12,7 @@ import FilterItem from "../ui/filterItem";
 const FiltersSort = ({ setFilters }: FiltersProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="lg:hidden">
+      <DropdownMenuTrigger >
         <SlidersHorizontal className="cursor-pointer text-sky-700" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="relative right-[20%] bg-white md:right-[30%]">

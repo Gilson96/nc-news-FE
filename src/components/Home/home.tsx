@@ -16,7 +16,7 @@ const Home = () => {
   });
 
   return (
-    <main className="flex h-full w-full flex-col items-center justify-center border lg:mt-0 lg:h-screen lg:w-full lg:flex-row lg:items-start lg:pt-12 lg:place-self-center lg:overflow-hidden">
+    <main className="flex h-full w-full flex-col items-center justify-center border lg:mt-0 lg:h-screen lg:w-full lg:flex-row lg:items-start lg:place-self-center lg:overflow-hidden lg:pt-12">
       <Filters setFilters={setFilters} />
       <Articles
         sort_by={filters.sort_by}
