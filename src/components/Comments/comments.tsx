@@ -1,37 +1,16 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import type { CommentsArray } from "../../utils/dataTypes";
 import { Loader2 } from "lucide-react";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import PostComments from "./postComments";
 import DeleteComments from "./deleteComments";
+import { useGetComments } from "../../hooks/useFetchActions";
 
 type CommentsProps = {
   articleId: number;
 };
 
 const Comments = ({ articleId }: CommentsProps) => {
-  const [comments, setComments] = useState<CommentsArray>();
-  const [commentId, setCommentId] = useState<number>();
-  const [successDelete, setSuccessDelete] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const commentsLength = comments === undefined ? 1 : comments.length;
-  const randomAuthor = Math.floor(Math.random() * commentsLength);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}/comments`,
-      )
-      .then(function (response) {
-        setComments(response.data);
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [successDelete]);
+  const { commentId, comments, isLoading, setCommentId, setSuccessDelete } =
+    useGetComments(articleId);
 
   return (
     <section className="flex flex-col gap-3">
@@ -40,12 +19,7 @@ const Comments = ({ articleId }: CommentsProps) => {
         <Loader2 className="animate animate-spin" />
       ) : (
         <div>
-          <PostComments
-            articleId={articleId}
-            randomAuthor={
-              comments === undefined ? "" : comments[randomAuthor].author
-            }
-          />
+          <PostComments articleId={articleId} />
           {comments?.map((comment) => (
             <>
               <ul className="border-b py-[4%] text-sm">

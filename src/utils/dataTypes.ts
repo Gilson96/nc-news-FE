@@ -9,6 +9,12 @@ export interface Article {
     count: number
 }
 
+export interface ArticleFilters {
+    sort_by: string;
+    order: string;
+    topic: string;
+}
+
 export type Articles = Article[];
 
 export type ArticleObj = {

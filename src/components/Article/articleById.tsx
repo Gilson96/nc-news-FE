@@ -1,36 +1,20 @@
-import axios, { AxiosError } from "axios";
-import { useState, useEffect } from "react";
-import type { ArticleObj } from "../../utils/dataTypes";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import { useParams } from "react-router";
 import Comments from "../Comments/comments";
 import InfoButtons from "../ui/infoButtons";
 import Authors from "./authors";
 import Four0FourError from "../ErrorHandling/four0FourError";
+import { useGetArticleById } from "../../hooks/useFetchActions";
 
 const ArticleById = () => {
-  const [article, setArticle] = useState<ArticleObj>();
-  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
-  const [isArticleLoading, setIsArticleLoading] = useState(true);
-  const [articleNotFound, setArticleNotFound] = useState(false);
-
-  const articleId = useParams();
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${Number(articleId.article_id)}`,
-      )
-      .then(function (response) {
-        setArticle(response.data);
-        setIsArticleLoading(false);
-      })
-      .catch(function (error: AxiosError) {
-        if (error.status === 404) {
-          setArticleNotFound(true);
-        }
-      });
-  }, [updatedArticlesVotes]);
+  const { article_id } = useParams();
+  const articleId = Number(article_id);
+  const {
+    article,
+    articleNotFound,
+    isArticleLoading,
+    setUpdatedArticlesVotes,
+  } = useGetArticleById(articleId);
 
   if (articleNotFound) {
     return <Four0FourError />;
@@ -86,12 +70,12 @@ const ArticleById = () => {
             </div>
 
             <span className="lg:hidden">
-              <Comments articleId={Number(articleId.article_id)} />
+              <Comments articleId={articleId} />
             </span>
           </div>
         </span>
         <span className="lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[6%] lg:pr-[2%] lg:pl-[3%]">
-          <Comments articleId={Number(articleId.article_id)} />
+          <Comments articleId={articleId} />
         </span>
       </article>
     );

@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import FiltersSort from "./filters_sort";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
-import { Ellipsis, EllipsisVertical } from "lucide-react";
 import PostArticle from "../Article/postArticle";
 
 export type FiltersProps = {

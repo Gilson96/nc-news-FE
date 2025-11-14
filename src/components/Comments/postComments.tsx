@@ -5,18 +5,17 @@ import { toast } from "sonner";
 
 type PostCommentsProps = {
   articleId: number;
-  randomAuthor: string;
 };
 
-const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
+const PostComments = ({ articleId }: PostCommentsProps) => {
   const [inputValue, setInputValue] = useState<string>();
-  const [openTextArea, setOpenTextArea] = useState<boolean>(false);
+  const [openTextArea, setOpenTextArea] = useState(false);
 
   const newComment = {
     article_id: articleId,
     body: inputValue,
     votes: 0,
-    username: randomAuthor,
+    username: "Guest",
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,7 +27,10 @@ const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
       )
       .then(() => {
         setOpenTextArea(false);
-        toast("Your comment was sucessfully added", {});
+        toast(
+          `Your comment was sucessfully added!\nRefresh to see the comment`,
+          {},
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -79,7 +81,7 @@ const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
           onClick={() => {
             setOpenTextArea(false);
           }}
-          className="place-s-end w-32 lg:w-40 cursor-pointer rounded-full border bg-gray-100 px-[2%] py-[1%] text-sm font-medium"
+          className="place-s-end w-32 cursor-pointer rounded-full border bg-gray-100 px-[2%] py-[1%] text-sm font-medium lg:w-40"
         >
           Cancel comment
         </button>

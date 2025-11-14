@@ -1,41 +1,27 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import type { Articles } from "../../utils/dataTypes";
 import { Link, useLocation } from "react-router";
 import { Loader2 } from "lucide-react";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import InfoButtons from "../ui/infoButtons";
 import Four0FourError from "../ErrorHandling/four0FourError";
+import { useGetArticles } from "../../hooks/useFetchActions";
 
 interface LocationState {
   search: "?topic=coding" | "?topic=cooking" | "?topic=football";
 }
 
 const Topic = () => {
-  const [articleTopics, setArticleTopics] = useState<Articles>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
   const { search } = useLocation() as LocationState;
-
-  const allowedSearch = ["?topic=coding", "?topic=cooking", "?topic=football"];
+  const topic = search;
+  const allowedSearch = ["&topic=coding", "&topic=cooking", "&topic=football"];
+  const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
+    "",
+    topic,
+    "",
+  );
 
   if (!allowedSearch.includes(search)) {
     return <Four0FourError />;
   }
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles${search}`,
-      )
-      .then(function (response) {
-        setArticleTopics(response.data);
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [updatedArticlesVotes]);
 
   return (
     <section className="flex h-full w-full items-center justify-center gap-2 bg-white">
@@ -48,7 +34,7 @@ const Topic = () => {
               {search.slice(7)}
             </h1>
             <div className="lg:flex lg:flex-wrap lg:items-center">
-              {articleTopics?.map((article) => (
+              {articles?.map((article) => (
                 <article className="flex w-full flex-col border-b py-[2%] lg:w-[50%]">
                   <div className="lg flex w-full items-start justify-between lg:w-full lg:flex-col lg:items-center lg:justify-center">
                     <Link

@@ -1,30 +1,14 @@
-import { useEffect, useState } from "react";
-import type { Users } from "../../utils/dataTypes";
-import axios from "axios";
+import { useGetAuthors } from "../../hooks/useFetchActions";
 
-type AuthorsProps = {
+const Authors = ({
+  article_author,
+}: {
   article_author: string | undefined;
-};
+}) => {
+  const { isLoading, findUserImage } = useGetAuthors(article_author);
 
-const Authors = ({ article_author }: AuthorsProps) => {
-  const [user, setUser] = useState<Users>();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`https://nc-news-api-99f5fdc34977.herokuapp.com/api/users`)
-      .then(function (response) {
-        setUser(response.data);
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  const findUserImage = user?.find(
-    (u) => u.username === article_author,
-  )?.avatar_url;
+  console.log(article_author);
+  console.log(findUserImage);
 
   return isLoading ? (
     <span

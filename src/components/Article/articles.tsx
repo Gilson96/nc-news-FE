@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react";
-import type { Articles } from "../../utils/dataTypes";
-import axios from "axios";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import { Loader2 } from "lucide-react";
 import type { HomeProps } from "../Home/home";
 import { Link } from "react-router";
 import InfoButtons from "../ui/infoButtons";
+import { useGetArticles } from "../../hooks/useFetchActions";
 
 const Article = ({ sort_by, topic, order }: HomeProps) => {
-  const [articles, setArticles] = useState<Articles>();
-  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
-  const [isLoading, setIsLoading] = useState(true);
+  const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
+    sort_by,
+    topic,
+    order,
+  );
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?sort_by=${sort_by}&order=${order}`,
-      )
-      .then(function (response) {
-        setArticles(response.data);
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [updatedArticlesVotes, sort_by, topic, order]);
-
+  console.log(sort_by, topic, order)
   return (
     <main className="flex w-full flex-col bg-white p-[2%] lg:h-full lg:overflow-y-auto lg:px-[8%] lg:py-[1.6%]">
       {isLoading ? (
