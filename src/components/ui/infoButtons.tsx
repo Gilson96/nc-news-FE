@@ -5,6 +5,7 @@ import {
   MessageCircle,
   ArrowBigDownDash,
 } from "lucide-react";
+import { toast } from "sonner";
 
 type InfoButtonsProps = {
   author: string;
@@ -45,6 +46,7 @@ const InfoButtons = ({
               )
               .then(({ data }) => {
                 setUpdatedArticlesVotes(data.article.votes);
+                toast("Your vote has been given!");
               })
               .catch((err) => {
                 console.log(err);
@@ -63,6 +65,7 @@ const InfoButtons = ({
               )
               .then(({ data }) => {
                 setUpdatedArticlesVotes(data.article.votes);
+                toast("Your vote has been given!");
               })
               .catch((err) => {
                 console.log(err);
