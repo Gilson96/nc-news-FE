@@ -79,7 +79,7 @@ const PostComments = ({ articleId, randomAuthor }: PostCommentsProps) => {
           onClick={() => {
             setOpenTextArea(false);
           }}
-          className="place-s-end w-32 cursor-pointer rounded-full border bg-gray-100 px-[2%] py-[1%] text-sm font-medium"
+          className="place-s-end w-32 lg:w-40 cursor-pointer rounded-full border bg-gray-100 px-[2%] py-[1%] text-sm font-medium"
         >
           Cancel comment
         </button>

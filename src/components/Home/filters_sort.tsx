@@ -7,63 +7,48 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import type { FiltersProps } from "./filters";
+import FilterItem from "../ui/filterItem";
 
 const FiltersSort = ({ setFilters }: FiltersProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="lg:hidden">
         <SlidersHorizontal className="cursor-pointer text-sky-700" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="relative right-[20%] bg-white md:right-[30%]">
         <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-        <DropdownMenuItem
-          onClick={() =>
-            setFilters((prev) => ({
-              ...prev,
-              sort_by: "created_at",
-              order: "DESC",
-            }))
-          }
-          className="flex cursor-pointer items-center justify-between"
-        >
-          <span>Newest</span>
+        <DropdownMenuItem>
+          <FilterItem
+            order="DESC"
+            setFilters={setFilters}
+            sort_by="created_at"
+            title="Newest"
+          />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() =>
-            setFilters((prev) => ({
-              ...prev,
-              sort_by: "created_at",
-              order: "ASC",
-            }))
-          }
-          className="flex cursor-pointer items-center justify-between"
-        >
-          <span>Oldest</span>
+        <DropdownMenuItem>
+          <FilterItem
+            order="ASC"
+            setFilters={setFilters}
+            sort_by="created_at"
+            title="Oldest"
+          />
         </DropdownMenuItem>
         <hr className="h-[0.2px] bg-gray-200" />
-        <DropdownMenuItem
-          onClick={() =>
-            setFilters((prev) => ({
-              ...prev,
-              sort_by: "count",
-              order: "DESC",
-            }))
-          }
-          className="flex cursor-pointer items-center justify-between"
-        >
-          <span>More comments</span>
+        <DropdownMenuItem>
+          <FilterItem
+            order="DESC"
+            setFilters={setFilters}
+            sort_by="count"
+            title="More comments"
+          />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() =>
-            setFilters((prev) => ({
-              ...prev,
-              sort_by: "count",
-              order: "ASC",
-            }))
-          }
-          className="flex cursor-pointer items-center justify-between"
-        >
-          <span>Less comments</span>
+        <DropdownMenuItem>
+          <FilterItem
+            order="ASC"
+            setFilters={setFilters}
+            sort_by="count"
+            title="Less comments"
+          />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

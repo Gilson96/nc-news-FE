@@ -1,11 +1,9 @@
-import Menu from "./menu";
 import { Link } from "react-router";
 
 const Navigator = () => {
   return (
-    <main className="flex h-12 w-full items-center justify-between border-b bg-white px-[3%] py-[6%] md:py-[3%]">
+    <main className="flex lg:absolute h-12 w-full items-center justify-between border-b bg-white px-[3%] py-[6%] lg:py-[2%]">
       <div className="flex items-center gap-2">
-        <Menu />
         <Link className="text-xl font-bold text-sky-700" to={"/"}>
           NC-News
         </Link>

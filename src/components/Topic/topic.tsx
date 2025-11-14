@@ -10,6 +10,7 @@ import Four0FourError from "../ErrorHandling/four0FourError";
 interface LocationState {
   search: "?topic=coding" | "?topic=cooking" | "?topic=football";
 }
+
 const Topic = () => {
   const [articleTopics, setArticleTopics] = useState<Articles>();
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,7 @@ const Topic = () => {
   if (!allowedSearch.includes(search)) {
     return <Four0FourError />;
   }
-  
+
   useEffect(() => {
     axios
       .get(
@@ -37,37 +38,36 @@ const Topic = () => {
   }, [updatedArticlesVotes]);
 
   return (
-    <section className="flex h-full w-full items-center justify-center gap-2">
+    <section className="flex h-full w-full items-center justify-center gap-2 bg-white">
       {isLoading ? (
         <Loader2 className="animate animate-spin" />
       ) : (
         <div className="w-full">
-          <div className="h-20 w-full bg-linear-to-r from-cyan-500 to-blue-500">
-            <span></span>
-          </div>
-          <div className="flex w-full flex-col p-[2%]">
-            <h1 className="border-b pt-5 pb-4 text-2xl font-medium capitalize">
+          <div className="flex w-full flex-col px-[3%]">
+            <h1 className="border-b pt-5 pb-4 text-2xl font-medium capitalize lg:pt-16">
               {search.slice(7)}
             </h1>
-            <div>
+            <div className="lg:flex lg:flex-wrap lg:items-center">
               {articleTopics?.map((article) => (
-                <article className="flex w-full flex-col border-b py-[2%]">
-                  <div className="flex w-full items-start justify-between lg:flex-col lg:items-center lg:justify-center">
+                <article className="flex w-full flex-col border-b py-[2%] lg:w-[50%]">
+                  <div className="lg flex w-full items-start justify-between lg:w-full lg:flex-col lg:items-center lg:justify-center">
                     <Link
                       to={`/article/${article.article_id}`}
                       className="max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pb-2"
                     >
-                      <h1 className="w-[80%] text-lg font-medium">
+                      <h1 className="w-[80%] truncate text-lg font-medium lg:w-[60%] lg:text-base">
                         {article.title}
                       </h1>
-                      <p className="">{dateOnlyFormat(article.created_at)}</p>
+                      <p className="pr-[10%]">
+                        {dateOnlyFormat(article.created_at)}
+                      </p>
                     </Link>
                     <Link
                       to={`/article/${article.article_id}`}
                       className="w-[30%] lg:w-full"
                     >
                       <img
-                        className="h-24 w-24 rounded lg:h-full lg:w-full"
+                        className="h-24 w-24 rounded lg:h-52 lg:w-[20rem]"
                         src={article.article_img_url}
                       />
                     </Link>
