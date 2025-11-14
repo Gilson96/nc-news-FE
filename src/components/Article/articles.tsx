@@ -27,7 +27,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
   }, [updatedArticlesVotes, sort_by, topic, order]);
 
   return (
-    <main className="flex w-full flex-col bg-white p-[2%] lg:px-[8%] lg:py-[1.6%] lg:h-full lg:overflow-y-auto">
+    <main className="flex w-full flex-col bg-white p-[2%] lg:h-full lg:overflow-y-auto lg:px-[8%] lg:py-[1.6%]">
       {isLoading ? (
         <Loader2 className="animate animate-spin" />
       ) : (
@@ -38,7 +38,9 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
                 to={`/article/${article.article_id}`}
                 className="max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pb-2"
               >
-                <h1 className="w-[80%] text-lg font-medium lg:w-[80%]">{article.title}</h1>
+                <h1 className="w-[80%] text-lg font-medium lg:w-[80%]">
+                  {article.title}
+                </h1>
                 <p className="">{dateOnlyFormat(article.created_at)}</p>
               </Link>
               <Link
@@ -46,7 +48,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
                 className="w-[30%] lg:w-full"
               >
                 <img
-                  className="h-24 w-24 rounded lg:place-self-center lg:h-[25rem] lg:w-[35rem]"
+                  className="h-24 w-24 rounded lg:h-100 lg:w-140 lg:place-self-center"
                   src={article.article_img_url}
                 />
               </Link>

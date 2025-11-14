@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/article/:article_id" element={<ArticleById />} />
         <Route path="/topic" element={<Topic />} />
-        <Route path="/*" element={<Four0FourError />} />
+        {/* <Route path="/*" element={<Four0FourError />} /> */}
       </Routes>
     </>
   );
