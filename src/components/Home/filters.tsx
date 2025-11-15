@@ -18,19 +18,19 @@ const Filters = ({ setFilters }: FiltersProps) => {
         <span className="flex gap-3">
           <Link
             className="w-auto rounded border px-[4%] py-[2%] font-medium hover:bg-gray-100 lg:font-normal"
-            to={`/topic?topic=coding`}
+            to={`/articles?topic=coding`}
           >
             Coding
           </Link>
           <Link
             className="w-auto rounded border px-[4%] py-[2%] font-medium hover:bg-gray-100 lg:font-normal"
-            to={`/topic?topic=cooking`}
+            to={`/articles?topic=cooking`}
           >
             Cooking
           </Link>
           <Link
             className="w-auto rounded border px-[4%] py-[2%] font-medium hover:bg-gray-100 lg:font-normal"
-            to={`/topic?topic=football`}
+            to={`/articles?topic=football`}
           >
             Football
           </Link>

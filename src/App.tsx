@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/article/:article_id" element={<ArticleById />} />
-        <Route path="/topic" element={<Topic />} />
+        <Route path="/articles" element={<Topic />} />
         <Route path="/*" element={<Four0FourError />} />
       </Routes>
     </>

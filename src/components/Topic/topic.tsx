@@ -5,23 +5,18 @@ import InfoButtons from "../ui/infoButtons";
 import Four0FourError from "../ErrorHandling/four0FourError";
 import { useGetArticles } from "../../hooks/useFetchActions";
 
-interface LocationState {
-  search: "?topic=coding" | "?topic=cooking" | "?topic=football";
-}
-
 const Topic = () => {
-  const { search } = useLocation() as LocationState;
+  const { search } = useLocation();
   const topic = search;
-  const allowedSearch = ["&topic=coding", "&topic=cooking", "&topic=football"];
   const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
     "",
     topic,
     "",
   );
 
-  if (!allowedSearch.includes(search)) {
-    return <Four0FourError />;
-  }
+  // if (!allowedSearch.includes(search)) {
+  //   return <Four0FourError />;
+  // }
 
   return (
     <section className="flex h-full w-full items-center justify-center gap-2 bg-white">

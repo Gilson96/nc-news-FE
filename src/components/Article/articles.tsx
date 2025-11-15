@@ -12,7 +12,6 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
     order,
   );
 
-  console.log(sort_by, topic, order)
   return (
     <main className="flex w-full flex-col bg-white p-[2%] lg:h-full lg:overflow-y-auto lg:px-[8%] lg:py-[1.6%]">
       {isLoading ? (

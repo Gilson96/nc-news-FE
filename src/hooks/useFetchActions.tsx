@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import type {
-  ArticleFilters,
   ArticleObj,
   Articles,
   CommentsArray,
@@ -17,11 +16,14 @@ export const useGetArticles = (
   const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(`https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?${sort_by === "" ? "" : `sort_by=${sort_by}&`}${order === "" ? "" : `order=${order}`}${topic === "all" ? "" : topic}`)
+  sort_by = sort_by.length < 1 ? "" : `?sort_by=${sort_by}&`;
+  order = order.length < 1 ? "" : `order=${order}`;
+  topic = topic === "all" ? "" : topic;
+  
   useEffect(() => {
     axios
       .get(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles?${sort_by === "" ? "" : `sort_by=${sort_by}&`}${order === "" ? "" : `order=${order}`}${topic === "all" ? "" : topic}`,
+        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles${sort_by}${order}${topic}`,
       )
       .then(function (response) {
         setArticles(response.data);
