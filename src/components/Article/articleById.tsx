@@ -20,8 +20,8 @@ const ArticleById = () => {
     return <Four0FourError />;
   } else {
     return (
-      <article className="flex w-full flex-col bg-white px-[3%] pt-[4%] lg:h-screen lg:flex-row lg:justify-between lg:gap-32 lg:overflow-hidden lg:p-0">
-        <span className="lg:pt-[6%] lg:pl-[3%]">
+      <article className="flex w-full flex-col bg-white px-[3%] pt-[4%] lg:h-screen lg:flex-row lg:justify-between lg:gap-32 lg:overflow-hidden lg:p-0 lg:pt-12">
+        <span className="lg:pt-[2%] lg:pl-[3%]">
           <div className="flex items-center gap-1">
             <Authors article_author={article?.article.author} />
             <p
@@ -74,7 +74,7 @@ const ArticleById = () => {
             </span>
           </div>
         </span>
-        <span className="lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[6%] lg:pr-[2%] lg:pl-[3%]">
+        <span className="max-lg:hidden lg:h-full lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[2%] lg:pr-[2%] lg:pl-[3%]">
           <Comments articleId={articleId} />
         </span>
       </article>
