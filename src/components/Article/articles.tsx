@@ -31,7 +31,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
               </Link>
               <Link
                 to={`/article/${article.article_id}`}
-                className="w-[30%] lg:w-full"
+                className="max-xs:hidden w-[30%] lg:w-full"
               >
                 <img
                   className="h-24 w-24 rounded lg:h-100 lg:w-140 lg:place-self-center"
@@ -41,7 +41,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
               <div className="flex w-full flex-col items-end gap-2 text-right">
                 <Link
                   to={`/article/${article.article_id}`}
-                  className="text-sm lg:hidden"
+                  className="max-xs:w-full w-[80%] text-sm lg:hidden"
                 >
                   {article.title}
                 </Link>

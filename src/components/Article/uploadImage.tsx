@@ -7,6 +7,7 @@ import {
 } from "../ui/dialog";
 import { Label } from "../ui/label";
 import axios from "axios";
+
 const UploadImage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,6 +35,7 @@ const UploadImage = () => {
             <form
               className="flex w-full flex-col items-start justify-start gap-5"
               onSubmit={handleSubmit}
+              encType="multipart/form-data"
             >
               <div className="flex w-full items-center justify-start gap-2">
                 <Label>Image</Label>
