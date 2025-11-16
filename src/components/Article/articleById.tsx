@@ -5,6 +5,7 @@ import InfoButtons from "../ui/infoButtons";
 import Authors from "./authors";
 import Four0FourError from "../ErrorHandling/four0FourError";
 import { useGetArticleById } from "../../hooks/useFetchActions";
+import UploadImage from "./uploadImage";
 
 const ArticleById = () => {
   const { article_id } = useParams();
@@ -50,11 +51,17 @@ const ArticleById = () => {
                 className={`animate h-40 w-52 animate-pulse rounded-xl bg-gray-300`}
               ></span>
             ) : (
-              <img
-                className={`h-60 w-full rounded-xl md:h-80 lg:h-80`}
-                src={article?.article.article_img_url}
-                alt="user avatar"
-              />
+              <>
+                {article?.article.article_img_url === null ? (
+                  <UploadImage />
+                ) : (
+                  <img
+                    className={`h-60 w-full rounded-xl md:h-80 lg:h-80`}
+                    src={article?.article.article_img_url}
+                    alt="user avatar"
+                  />
+                )}
+              </>
             )}
 
             <div className="flex w-full items-center justify-start gap-3 border-b py-[2%] text-sm">

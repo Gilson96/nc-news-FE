@@ -14,14 +14,32 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import axios from "axios";
 
 const PostArticle = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const articleData = Object.fromEntries(formData.entries());
-    console.log(articleData);
-    return formData;
+    const sendArticle = {
+      title: articleData.title,
+      topic: articleData.topic,
+      author: "guest",
+    };
+    axios
+      .post(
+        "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
+        sendArticle,
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+    axios
+      .post(
+        "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
+        sendArticle,
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -71,13 +89,13 @@ const PostArticle = () => {
                       </div>
                     </RadioGroup>
                   </div>
-
                   <div className="flex w-full items-center justify-start gap-2">
                     <Label>Image</Label>
-                    <Input
+                    <input
                       name="article_img_url"
                       type="file"
                       className="cursor-pointer"
+                      accept="image/png, image/jpeg"
                     />
                   </div>
                   <button

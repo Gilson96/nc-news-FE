@@ -13,10 +13,11 @@ const Topic = () => {
     topic,
     "",
   );
+  const allowedSearch = ["?topic=coding", "?topic=cooking", "?topic=football"];
 
-  // if (!allowedSearch.includes(search)) {
-  //   return <Four0FourError />;
-  // }
+  if (!allowedSearch.includes(search)) {
+    return <Four0FourError />;
+  }
 
   return (
     <section className="flex h-full w-full items-center justify-center gap-2 bg-white">

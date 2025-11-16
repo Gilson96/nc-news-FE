@@ -7,9 +7,6 @@ const Authors = ({
 }) => {
   const { isLoading, findUserImage } = useGetAuthors(article_author);
 
-  console.log(article_author);
-  console.log(findUserImage);
-
   return isLoading ? (
     <span
       className={`animate h-8 w-8 animate-pulse rounded-full border bg-gray-300`}

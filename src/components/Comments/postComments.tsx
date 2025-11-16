@@ -15,7 +15,7 @@ const PostComments = ({ articleId }: PostCommentsProps) => {
     article_id: articleId,
     body: inputValue,
     votes: 0,
-    username: "Guest",
+    username: "guest",
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

@@ -19,7 +19,7 @@ export const useGetArticles = (
   sort_by = sort_by.length < 1 ? "" : `?sort_by=${sort_by}&`;
   order = order.length < 1 ? "" : `order=${order}`;
   topic = topic === "all" ? "" : topic;
-  
+
   useEffect(() => {
     axios
       .get(
@@ -71,7 +71,6 @@ export const useGetAuthors = (article_author: string | undefined) => {
   const [user, setUser] = useState<Users>();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(article_author);
   const findUserImage = user?.find(
     (u) => u.username === article_author,
   )?.avatar_url;
