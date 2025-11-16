@@ -65,5 +65,5 @@ npm run dev
 
 ## Contact
 
-* LinkedIn: [Profile](linkedin.com/in/gilson-de-almeida)
+* LinkedIn: [Gilson de Almeida](linkedin.com/in/gilson-de-almeida)
 * This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
