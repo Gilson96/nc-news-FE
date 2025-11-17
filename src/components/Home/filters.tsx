@@ -38,7 +38,7 @@ const Filters = ({ setFilters }: FiltersProps) => {
       </div>
       <span className="flex items-center gap-1 lg:hidden">
         <FiltersSort setFilters={setFilters} />
-        <PostArticle />
+        {/* <PostArticle /> */}
       </span>
       <div className="max-lg:hidden lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2 lg:p-[2%]">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
@@ -83,6 +83,12 @@ const Filters = ({ setFilters }: FiltersProps) => {
           </div>
         </ul>
       </div>
+      {/* <div className="max-lg:hidden">
+        <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
+          New Article
+        </h1>
+        <PostArticle />
+      </div> */}
     </section>
   );
 };

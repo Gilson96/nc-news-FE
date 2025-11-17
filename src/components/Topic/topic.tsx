@@ -46,7 +46,7 @@ const Topic = () => {
                     </Link>
                     <Link
                       to={`/article/${article.article_id}`}
-                      className="w-[30%] lg:w-full"
+                      className="w-[30%] lg:w-full max-xs:hidden"
                     >
                       <img
                         className="h-24 w-24 rounded lg:h-52 lg:w-[20rem]"
