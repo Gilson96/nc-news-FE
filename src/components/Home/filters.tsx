@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import FiltersSort from "./filters_sort";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
-import PostArticle from "../Article/postArticle";
 
 export type FiltersProps = {
   setFilters: React.Dispatch<React.SetStateAction<HomeProps>>;

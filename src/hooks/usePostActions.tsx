@@ -26,13 +26,13 @@ export const usePostArticle = () => {
         .catch((err) => console.log(err));
     }
 
-    // axios
-    //   .post(
-    //     "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
-    //     sendArticle,
-    //   )
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.log(err));
+    axios
+      .post(
+        "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
+        sendArticle,
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
   return { handleSubmit };
 };
