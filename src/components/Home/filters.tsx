@@ -1,7 +1,8 @@
-import { Link } from "react-router";
 import FiltersSort from "./filters_sort";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
+import PostArticle from "../Article/postArticle";
+import TopicsInFilters from "../Topic/topicsInFilters";
 
 export type FiltersProps = {
   setFilters: React.Dispatch<React.SetStateAction<HomeProps>>;
@@ -10,34 +11,17 @@ export type FiltersProps = {
 const Filters = ({ setFilters }: FiltersProps) => {
   return (
     <section className="flex w-full items-center justify-between border-b bg-white p-[2%] lg:h-full lg:w-[60%] lg:flex-col lg:items-start lg:justify-start lg:gap-5 lg:border lg:px-[2%] lg:py-[1%]">
-      <div className="p-[2%] lg:flex lg:flex-col lg:items-start lg:gap-2">
+      <div className="p-[2%] lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
           Topics
         </h1>
-        <span className="flex gap-3">
-          <Link
-            className="w-auto rounded border px-[4%] py-[2%] text-sm font-medium hover:bg-gray-100 lg:text-base lg:font-normal"
-            to={`/articles?topic=coding`}
-          >
-            Coding
-          </Link>
-          <Link
-            className="w-auto rounded border px-[4%] py-[2%] text-sm font-medium hover:bg-gray-100 lg:text-base lg:font-normal"
-            to={`/articles?topic=cooking`}
-          >
-            Cooking
-          </Link>
-          <Link
-            className="w-auto rounded border px-[4%] py-[2%] text-sm font-medium hover:bg-gray-100 lg:text-base lg:font-normal"
-            to={`/articles?topic=football`}
-          >
-            Football
-          </Link>
-        </span>
+        <ul className="flex w-full gap-3 overflow-y-auto">
+          <TopicsInFilters />
+        </ul>
       </div>
       <span className="flex items-center gap-1 lg:hidden">
         <FiltersSort setFilters={setFilters} />
-        {/* <PostArticle /> */}
+        <PostArticle />
       </span>
       <div className="max-lg:hidden lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2 lg:p-[2%]">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
@@ -82,12 +66,12 @@ const Filters = ({ setFilters }: FiltersProps) => {
           </div>
         </ul>
       </div>
-      {/* <div className="max-lg:hidden">
+      <div className="max-lg:hidden">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
           New Article
         </h1>
         <PostArticle />
-      </div> */}
+      </div>
     </section>
   );
 };

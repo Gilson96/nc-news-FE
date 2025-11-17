@@ -16,10 +16,9 @@ export const usePostArticle = () => {
 
     if (articleData.new_topic !== undefined) {
       axios
-        .post(
-          "https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics",
-          articleData.new_topic,
-        )
+        .post("https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics", {
+          slug: articleData.new_topic,
+        })
         .then((response) => {
           console.log(response);
         })

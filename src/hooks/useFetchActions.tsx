@@ -1,10 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import type {
-  ArticleObj,
-  Articles,
-  CommentsArray,
-  Users,
+import {
+  type Topics,
+  type ArticleObj,
+  type Articles,
+  type CommentsArray,
+  type Users,
 } from "../utils/dataTypes";
 
 export const useGetArticles = (
@@ -117,4 +118,21 @@ export const useGetComments = (articleId: number) => {
     isLoading,
     comments,
   };
+};
+
+export const useGetTopics = () => {
+  const [topics, setTopics] = useState<Topics>();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics")
+      .then((response) => {
+        setIsLoading(false);
+        setTopics(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return { topics, isLoading };
 };
