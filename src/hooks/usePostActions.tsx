@@ -1,37 +1,61 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useState } from "react";
 
 export const usePostArticle = () => {
+  const [successSubmit, setSuccessSubmit] = useState(false);
+  const [errorSubmit, setErrorSubmit] = useState<string>();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const articleData = Object.fromEntries(formData.entries());
+    const newTopic = articleData.new_topic as string;
     const sendArticle = {
       title: articleData.title,
-      topic:
-        articleData.topic === undefined
-          ? articleData.new_topic
-          : articleData.topic,
+      topic: newTopic === undefined ? articleData.topic : newTopic,
       author: "guest",
     };
 
-    if (articleData.new_topic !== undefined) {
+    if (newTopic !== undefined) {
       axios
         .post("https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics", {
-          slug: articleData.new_topic,
+          slug: newTopic,
         })
         .then((response) => {
           console.log(response);
         })
-        .catch((err) => console.log(err));
+        .then(() => {
+          axios
+            .post(
+              "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
+              sendArticle,
+            )
+            .then((response) => {
+              setSuccessSubmit(true);
+              return response.data;
+            })
+            .catch((err: AxiosError<{ msg: string }>) => {
+              setErrorSubmit(err.response?.data.msg);
+            });
+        })
+        .catch((err: AxiosError<{ msg: string }>) => {
+          setErrorSubmit(err.response?.data.msg);
+        });
+    } else {
+      axios
+        .post(
+          "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
+          sendArticle,
+        )
+        .then((response) => {
+          setSuccessSubmit(true);
+          return response.data;
+        })
+        .catch((err: AxiosError<{ msg: string }>) => {
+          setErrorSubmit(err.response?.data.msg);
+        });
     }
-
-    axios
-      .post(
-        "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
-        sendArticle,
-      )
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
   };
-  return { handleSubmit };
+
+  return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
 };
