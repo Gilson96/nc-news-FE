@@ -1,28 +1,36 @@
 import FiltersSort from "./filters_sort";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
-import PostArticle from "../Article/postArticle";
+import HomeOptions from "../Article/homeOptions";
 import TopicsInFilters from "../Topic/topicsInFilters";
+import { useState } from "react";
+import useScreenSize from "../../hooks/useScreenSize";
 
 export type FiltersProps = {
   setFilters: React.Dispatch<React.SetStateAction<HomeProps>>;
 };
 
 const Filters = ({ setFilters }: FiltersProps) => {
-  return (
-    <section className="flex w-full items-center justify-between border-b bg-white p-[2%] lg:h-full lg:w-[60%] lg:flex-col lg:items-start lg:justify-start lg:gap-5 lg:border lg:px-[2%] lg:py-[1%]">
-      <div className="p-[2%] lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2">
-        <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
-          Topics
-        </h1>
-        <ul className="flex w-full gap-3 overflow-y-auto">
-          <TopicsInFilters />
-        </ul>
-      </div>
+  const [topicsQuantity, setTopicsQuantity] = useState<number>(3);
+  const screenSize = useScreenSize();
+
+  return screenSize.width < 1024 ? (
+    <section className="flex h-18 w-full items-center justify-between border-b bg-white px-[2%]">
+      <ul
+        className={`flex w-full gap-3 ${topicsQuantity > 3 ? "max-xs:w-[75%] xs:w-[80%] overflow-y-auto" : ""} `}
+      >
+        <TopicsInFilters setTopicsQuantity={setTopicsQuantity} />
+      </ul>
       <span className="flex items-center gap-1 lg:hidden">
         <FiltersSort setFilters={setFilters} />
-        <PostArticle />
+        <HomeOptions />
       </span>
+    </section>
+  ) : (
+    <section>
+      <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
+        Topics
+      </h1>
       <div className="max-lg:hidden lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2 lg:p-[2%]">
         <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
           Sort by
@@ -65,12 +73,13 @@ const Filters = ({ setFilters }: FiltersProps) => {
             </li>
           </div>
         </ul>
-      </div>
-      <div className="max-lg:hidden">
-        <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
-          New Article
-        </h1>
-        <PostArticle />
+        //{" "}
+        <div className="max-lg:hidden">
+          <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
+            New Article
+          </h1>
+          <HomeOptions />
+        </div>
       </div>
     </section>
   );

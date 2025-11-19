@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Articles from "../Article/articles";
 import Filters from "./filters";
+import Profile from "../../Profile/profileDesktopView";
 
 export type HomeProps = {
   sort_by: string;
@@ -23,6 +24,7 @@ const Home = () => {
         order={filters.order}
         topic={filters.topic}
       />
+      <Profile />
     </main>
   );
 };

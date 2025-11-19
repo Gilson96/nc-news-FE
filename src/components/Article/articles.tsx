@@ -24,17 +24,17 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
                 to={`/article/${article.article_id}`}
                 className="max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pb-2"
               >
-                <h1 className="w-[80%] text-lg font-medium lg:w-[80%]">
+                <h1 className="w-[80%] text-lg font-medium lg:w-[80%] lg:py-[3%] lg:text-sm">
                   {article.title}
                 </h1>
-                <p className="">{dateOnlyFormat(article.created_at)}</p>
+                <p className="text-sm">{dateOnlyFormat(article.created_at)}</p>
               </Link>
               <Link
                 to={`/article/${article.article_id}`}
                 className="max-xs:hidden w-[30%] lg:w-full"
               >
                 <img
-                  className="h-24 w-24 rounded lg:h-100 lg:w-140 lg:place-self-center"
+                  className="h-24 w-24 rounded lg:h-[15rem] lg:w-[25rem] lg:place-self-center"
                   src={article.article_img_url}
                 />
               </Link>
@@ -51,7 +51,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
                 >
                   {dateOnlyFormat(article.created_at)}
                 </Link>
-                <div className="flex w-full items-center justify-end gap-3 text-sm lg:justify-start lg:py-[2%]">
+                <div className="flex w-full items-center justify-end gap-3 text-sm lg:justify-start lg:py-[4%]">
                   <InfoButtons
                     articleId={article.article_id}
                     setUpdatedArticlesVotes={setUpdatedArticlesVotes}

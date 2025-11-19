@@ -1,105 +1,140 @@
-import { MinusCircle, PlusCircle } from "lucide-react";
+import { MinusCircle, PlusCircle, XCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type SetStateAction } from "react";
+import { useGetTopics } from "../../hooks/useFetchActions";
 
 const FormModal = ({
   handleSubmit,
+  successSubmit,
+  setSuccessSubmit,
+  errorSubmit,
+  openDialog,
+  setOpenDialog,
 }: {
+  setSuccessSubmit: React.Dispatch<SetStateAction<boolean>>;
+  successSubmit: boolean;
+  errorSubmit: string | undefined;
+  openDialog: boolean;
+  setOpenDialog: React.Dispatch<SetStateAction<boolean>>;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }) => {
   const [openNewTopic, setOpenNewTopic] = useState(false);
+  const { topics, isLoading } = useGetTopics();
+
+  if (successSubmit) {
+    setOpenDialog(false);
+  }
   return (
-    <Dialog>
-      <DialogTrigger className="flex w-full cursor-pointer items-center gap-1 rounded py-[2%] pl-[5%] hover:bg-gray-100">
+    <Dialog open={openDialog ? true : false}>
+      <DialogTrigger
+        onClick={() => setOpenDialog(true)}
+        className="flex w-full cursor-pointer items-center gap-1 rounded py-[2%] pl-[5%] hover:bg-gray-100"
+      >
         <PlusCircle color="black" size={16} />
         <span className="text-sm">Add Article</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="border-b pb-2 text-left">
-            Add Article
+          <DialogTitle className="flex w-full items-center justify-between border-b pb-2 text-left">
+            <p>Add Article</p>
+            <XCircle onClick={() => setOpenDialog(false)} />
           </DialogTitle>
-          <form
-            className="flex w-full flex-col items-start justify-start gap-5"
-            onSubmit={handleSubmit}
-          >
-            <div className="flex w-full flex-col items-start justify-start gap-2">
-              <Label>Title</Label>
-              <Input
-                type="text"
-                name="title"
-                placeholder="Title"
-                className="w-full"
-                required
-              />
-            </div>
+        </DialogHeader>
+        <form
+          className="flex w-full flex-col items-start justify-start gap-5"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex w-full flex-col items-start justify-start gap-2">
+            <Label>Title</Label>
+            <Input
+              type="text"
+              name="title"
+              placeholder="Title"
+              className="w-full"
+              required
+            />
+          </div>
 
-            <div className="flex w-full flex-col items-start justify-start gap-1">
-              {!openNewTopic && (
-                <>
-                  <Label>Topic</Label>
-                  <RadioGroup
-                    defaultValue="comfortable"
-                    name="topic"
-                    className="flex pt-3"
-                    required={!openNewTopic && true}
-                  >
+          <div className="flex w-full flex-col items-start justify-start gap-1">
+            {!openNewTopic && (
+              <>
+                <Label>Topic</Label>
+                <RadioGroup
+                  defaultValue="comfortable"
+                  name="topic"
+                  className="flex flex-wrap pt-3"
+                  required={!openNewTopic && true}
+                >
+                  {isLoading ? (
                     <div className="flex items-center gap-3">
-                      <RadioGroupItem value="coding" id="r1" />
-                      <Label htmlFor="r1">Coding</Label>
+                      <RadioGroupItem value="" />
+                      <Label
+                        className="animate animate-pulse bg-gray-200 text-gray-200"
+                        htmlFor="r1"
+                      >
+                        Load
+                      </Label>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <RadioGroupItem value="cooking" id="r2" />
-                      <Label htmlFor="r2">Cooking</Label>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <RadioGroupItem value="football" id="r3" />
-                      <Label htmlFor="r3">Football</Label>
-                    </div>
-                  </RadioGroup>
-                  <p className="mt-[5%] mb-[2%] flex items-center justify-center gap-2">
-                    <PlusCircle
-                      size={20}
-                      className=""
-                      onClick={() => setOpenNewTopic(true)}
-                    />
-                    <span>Add a new topic</span>
-                  </p>
-                </>
-              )}
-
-              {openNewTopic && (
-                <>
-                  <p className="mt-[5%] mb-[2%] flex items-center justify-center gap-2">
-                    <MinusCircle
-                      size={20}
-                      className="mt-[5%] mb-[2%]"
-                      onClick={() => setOpenNewTopic(false)}
-                    />
-                    <span>Choose a topic</span>
-                  </p>
-
-                  <Label className="pt-[5%] pb-[2%]">Add new topic</Label>
-                  <Input
-                    type="text"
-                    name="new_topic"
-                    placeholder="New topic"
-                    className="w-full"
-                    required={openNewTopic && true}
+                  ) : (
+                    topics?.map((topic) => (
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value={topic.slug} id="r1" />
+                        <Label htmlFor="r1">{topic.slug}</Label>
+                      </div>
+                    ))
+                  )}
+                </RadioGroup>
+                <p className="mt-[5%] mb-[2%] flex items-center justify-center gap-2">
+                  <PlusCircle
+                    size={20}
+                    className="cursor-pointer"
+                    onClick={() => setOpenNewTopic(true)}
                   />
-                </>
-              )}
-            </div>
-            {/* <div className="flex w-full items-center justify-start gap-2">
+                  <span>Add a new topic</span>
+                </p>
+              </>
+            )}
+
+            {openNewTopic && (
+              <>
+                <p className="mt-[5%] mb-[2%] flex items-center justify-center gap-2">
+                  <MinusCircle
+                    size={20}
+                    className="cursor-pointer"
+                    onClick={() => setOpenNewTopic(false)}
+                  />
+                  <span>Choose a topic</span>
+                </p>
+
+                <Label className="pt-[5%] pb-[2%]">Add new topic</Label>
+                <Input
+                  type="text"
+                  name="new_topic"
+                  placeholder="NewTopic"
+                  className={`w-full ${errorSubmit?.length! > 1 ? "border-red-400" : ""}`}
+                  pattern="[^\s]+"
+                  title="No white spaces"
+                  required={openNewTopic && true}
+                />
+                {errorSubmit?.length! > 1 ? (
+                  <p className="text-xs text-red-400">{errorSubmit}</p>
+                ) : (
+                  ""
+                )}
+              </>
+            )}
+          </div>
+          {/* <div className="flex w-full items-center justify-start gap-2">
               <Label>Image</Label>
               <input
                 name="article_img_url"
@@ -108,14 +143,14 @@ const FormModal = ({
                 accept="image/png, image/jpeg"
               />
             </div> */}
-            <button
-              type="submit"
-              className="place-self-end rounded-full border bg-sky-700 px-[4%] py-[1%] font-medium text-white max-md:relative"
-            >
-              Submit
-            </button>
-          </form>
-        </DialogHeader>
+
+          <button
+            type="submit"
+            className="cursor-pointer place-self-end rounded-full border bg-sky-700 px-[4%] py-[1%] font-medium text-white max-md:relative"
+          >
+            Submit
+          </button>
+        </form>
       </DialogContent>
     </Dialog>
   );
