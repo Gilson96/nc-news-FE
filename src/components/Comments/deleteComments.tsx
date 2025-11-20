@@ -23,7 +23,6 @@ const DeleteComments = ({
   commentId,
   setSuccessDelete,
 }: DeleteCommentsProps) => {
-  console.log(commentId);
   const handleDeleteComment = () => {
     axios
       .delete(
@@ -53,9 +52,11 @@ const DeleteComments = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="cursor-pointer">
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction
-            className="bg-red-600 cursor-pointer"
+            className="cursor-pointer bg-red-600"
             onClick={handleDeleteComment}
           >
             Continue

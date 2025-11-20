@@ -5,7 +5,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -34,6 +33,7 @@ const FormModal = ({
   if (successSubmit) {
     setOpenDialog(false);
   }
+
   return (
     <Dialog open={openDialog ? true : false}>
       <DialogTrigger
