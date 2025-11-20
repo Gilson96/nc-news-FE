@@ -33,7 +33,7 @@ export const useGetArticles = (
       .catch(function (error) {
         console.log(error);
       });
-  }, [updatedArticlesVotes, sort_by, topic, order]);
+  }, [updatedArticlesVotes, sort_by, topic, order, articles]);
 
   return { articles, isLoading, setUpdatedArticlesVotes };
 };
@@ -58,7 +58,7 @@ export const useGetArticleById = (article_id: number) => {
           setArticleNotFound(true);
         }
       });
-  }, [updatedArticlesVotes]);
+  }, [updatedArticlesVotes, article]);
 
   return {
     article,
@@ -86,7 +86,7 @@ export const useGetAuthors = (article_author: string | undefined) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [user]);
 
   return { isLoading, findUserImage };
 };
@@ -109,7 +109,7 @@ export const useGetComments = (articleId: number) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [successDelete]);
+  }, [successDelete, comments]);
 
   return {
     commentId,
@@ -132,7 +132,7 @@ export const useGetTopics = () => {
         setTopics(response.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [topics]);
 
   return { topics, isLoading };
 };
