@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const usePostArticle = () => {
   const [successSubmit, setSuccessSubmit] = useState(false);
@@ -57,5 +57,34 @@ export const usePostArticle = () => {
     }
   };
 
+  return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
+};
+
+export const useUpdateArticle = (article_id: number) => {
+  const [successSubmit, setSuccessSubmit] = useState(false);
+  const [errorSubmit, setErrorSubmit] = useState<string>();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const articleData = Object.fromEntries(formData.entries());
+    const sendArticle = {
+      title: articleData.title,
+    };
+
+    
+    axios
+      .patch(
+        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${article_id}`,
+        sendArticle,
+      )
+      .then((response) => {
+        setSuccessSubmit(true);
+        return response.data;
+      })
+      .catch((err: AxiosError<{ msg: string }>) => {
+        setErrorSubmit(err.response?.data.msg);
+      });
+  };
   return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
 };
