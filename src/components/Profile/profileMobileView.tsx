@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import useScreenSize from "../hooks/useScreenSize";
+import { useState } from "react";
+import useScreenSize from "../../hooks/useScreenSize";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../components/ui/dialog";
+} from "../ui/dialog";
 import { ArchiveX, Loader2, UserCircle2, XCircle } from "lucide-react";
-import { useGetArticles } from "../hooks/useFetchActions";
-import ArticleCard from "../components/ui/articleCard";
+import { useGetArticles } from "../../hooks/useFetchActions";
+import ArticleCard from "../ui/articleCard";
 import DeleteArticle from "./deleteArticle";
 import EditArticle from "./editArticle";
 
@@ -49,7 +48,8 @@ const ProfileMobileView = () => {
             </p>
           ) : (
             <ul className="overflow-y-auto">
-              {articles?.length === 0 && (
+              {articles?.filter((article) => article.author === "guest")
+                .length === 0 && (
                 <li className="flex flex-col place-items-center">
                   <ArchiveX size={50} className="text-gray-500" />
                   <p className="text-lg text-gray-500">No article created</p>

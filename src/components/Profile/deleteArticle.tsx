@@ -9,28 +9,38 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../components/ui/dialog";
-import { XCircle } from "lucide-react";
+} from "../ui/alert-dialog";
+import { useGetTopics } from "../../hooks/useFetchActions";
+import { useEffect, useState } from "react";
 
 const DeleteArticle = ({ article_id }: { article_id: number }) => {
+  const [successDelete, setSuccessDelete] = useState(false);
+  const { topics, isLoading } = useGetTopics();
+
   const handleDeleteArticle = () => {
     axios
       .delete(
         `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${article_id}`,
       )
       .then((response) => {
-        console.log(response);
+        setSuccessDelete(true);
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    const emptyTopic = topics?.find((topic) => topic.count === "0")?.slug;
+    if (emptyTopic !== undefined) {
+      axios
+        .delete(
+          `https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics/${emptyTopic}`,
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [topics]);
 
   return (
     <AlertDialog>

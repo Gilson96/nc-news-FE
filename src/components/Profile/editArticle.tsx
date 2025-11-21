@@ -2,10 +2,10 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
-import { useUpdateArticle } from "../hooks/usePostActions";
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
+} from "../ui/alert-dialog";
+import { useUpdateArticle } from "../../hooks/usePostActions";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 import { useState } from "react";
 
 const EditArticle = ({ article_id }: { article_id: number }) => {
