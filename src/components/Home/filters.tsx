@@ -27,14 +27,16 @@ const Filters = ({ setFilters }: FiltersProps) => {
       </span>
     </section>
   ) : (
-    <section>
-      <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
-        Topics
-      </h1>
-      <div className="max-lg:hidden lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-2 lg:p-[2%]">
-        <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
-          Sort by
-        </h1>
+    <section className="flex h-full w-[60%] flex-col gap-3 border-r bg-white p-[2%]">
+      <ul>
+        <h1 className="w-[22%] border-b text-lg font-medium">Topics</h1>
+        <li className="flex flex-wrap gap-2 py-[2%]">
+          <TopicsInFilters setTopicsQuantity={setTopicsQuantity} />
+        </li>
+      </ul>
+
+      <div className="flex w-full flex-col items-start gap-2 p-[2%]">
+        <h1 className="border-b text-lg font-medium">Sort by</h1>
         <ul className="flex w-full justify-between gap-2">
           <div className="flex w-full flex-col gap-2">
             <li className="flex cursor-pointer items-center justify-center rounded border px-[4%] py-[2%] font-medium hover:bg-gray-100 lg:font-normal">
@@ -73,13 +75,6 @@ const Filters = ({ setFilters }: FiltersProps) => {
             </li>
           </div>
         </ul>
-        //{" "}
-        <div className="max-lg:hidden">
-          <h1 className="border-b max-lg:hidden lg:text-lg lg:font-medium">
-            New Article
-          </h1>
-          <HomeOptions />
-        </div>
       </div>
     </section>
   );

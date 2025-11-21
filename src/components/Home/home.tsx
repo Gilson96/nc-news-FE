@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Articles from "../Article/articles";
 import Filters from "./filters";
-import Profile from "../../Profile/profileDesktopView";
+import Profile from "../Profile/profileDesktopView";
+import useScreenSize from "../../hooks/useScreenSize";
 
 export type HomeProps = {
   sort_by: string;
@@ -10,6 +11,7 @@ export type HomeProps = {
 };
 
 const Home = () => {
+  const screenSize = useScreenSize();
   const [filters, setFilters] = useState({
     sort_by: "created_at",
     order: "DESC",
@@ -24,7 +26,7 @@ const Home = () => {
         order={filters.order}
         topic={filters.topic}
       />
-      <Profile />
+      {screenSize.width > 1023 && <Profile />}
     </main>
   );
 };
