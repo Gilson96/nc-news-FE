@@ -3,14 +3,21 @@ import { dateOnlyFormat } from "../../utils/timeFormat";
 import PostComments from "./postComments";
 import DeleteComments from "./deleteComments";
 import { useGetComments } from "../../hooks/useFetchActions";
+import InfoButtons from "../ui/infoButtons";
 
 type CommentsProps = {
   articleId: number;
 };
 
 const Comments = ({ articleId }: CommentsProps) => {
-  const { commentId, comments, isLoading, setCommentId, setSuccessDelete } =
-    useGetComments(articleId);
+  const {
+    commentId,
+    comments,
+    isLoading,
+    setCommentId,
+    setSuccessDelete,
+    setUpdatedVotes,
+  } = useGetComments(articleId);
 
   return (
     <section className="flex flex-col gap-3">
@@ -42,10 +49,14 @@ const Comments = ({ articleId }: CommentsProps) => {
                     </span>
                   </div>
                   <p className="text-justify">{comment.body}</p>
-                  <p className="flex w-28 items-center justify-center gap-1 rounded-full border p-[2%]">
-                    <span>votes</span>
-                    <span>| {comment.votes}</span>
-                  </p>
+                  <div className="flex items-center justify-start">
+                    <InfoButtons
+                      votes={comment.votes}
+                      setUpdatedVotes={setUpdatedVotes}
+                      section="comments"
+                      sectionId={comment.comment_id}
+                    />
+                  </div>
                 </li>
               </ul>
             </>
