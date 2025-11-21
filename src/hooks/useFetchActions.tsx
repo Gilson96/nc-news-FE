@@ -96,6 +96,7 @@ export const useGetComments = (articleId: number) => {
   const [commentId, setCommentId] = useState<number>();
   const [successDelete, setSuccessDelete] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [updatedVotes, setUpdatedVotes] = useState<number>();
 
   useEffect(() => {
     axios
@@ -109,7 +110,7 @@ export const useGetComments = (articleId: number) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [successDelete, comments]);
+  }, [successDelete, comments, updatedVotes]);
 
   return {
     commentId,
@@ -117,6 +118,7 @@ export const useGetComments = (articleId: number) => {
     setSuccessDelete,
     isLoading,
     comments,
+    setUpdatedVotes,
   };
 };
 
@@ -130,6 +132,7 @@ export const useGetTopics = () => {
       .then((response) => {
         setIsLoading(false);
         setTopics(response.data);
+        return response;
       })
       .catch((err) => console.log(err));
   }, [topics]);
