@@ -66,13 +66,14 @@ const ArticleById = () => {
 
             <div className="flex w-full items-center justify-start gap-3 border-b py-[2%] text-sm">
               <InfoButtons
-                setUpdatedArticlesVotes={setUpdatedArticlesVotes}
-                articleId={
+                setUpdatedVotes={setUpdatedArticlesVotes}
+                sectionId={
                   article === undefined ? 0 : article?.article.article_id
                 }
                 author={article === undefined ? "n/a" : article?.article.author}
                 count={article === undefined ? 0 : article?.article.count}
                 votes={article === undefined ? 0 : article?.article.votes}
+                section={"articles"}
               />
             </div>
 

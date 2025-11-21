@@ -8,7 +8,7 @@ import { usePostArticle } from "../../hooks/usePostActions";
 import useScreenSize from "../../hooks/useScreenSize";
 import FormModal from "../ui/formModal";
 import { useState } from "react";
-import ProfileMobileView from "../../Profile/profileMobileView";
+import ProfileMobileView from "../Profile/profileMobileView";
 
 const HomeOptions = () => {
   const { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit } =
@@ -18,7 +18,7 @@ const HomeOptions = () => {
 
   return (
     <>
-      {screenSize.width > 720 ? (
+      {screenSize.width > 1024 ? (
         <>
           {" "}
           <FormModal
@@ -40,7 +40,7 @@ const HomeOptions = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="relative right-[20%] bg-white p-[5%] md:right-[30%]">
             <ProfileMobileView />
-            <hr className="py-[2%]"/>
+            <hr className="py-[2%]" />
             <FormModal
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}

@@ -21,9 +21,10 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
             <InfoButtons
               author={article.author}
               count={article.count}
-              setUpdatedArticlesVotes={setUpdatedArticlesVotes}
+              setUpdatedVotes={setUpdatedArticlesVotes}
               votes={article.votes}
-              articleId={article.article_id}
+              sectionId={article.article_id}
+              section={"articles"}
             />
           </ArticleCard>
         ))
