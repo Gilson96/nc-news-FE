@@ -32,6 +32,7 @@ export type Users = User[]
 export interface Topic {
     slug: string,
     description: string
+    count: string
 }
 
 export type Topics = Topic[];
