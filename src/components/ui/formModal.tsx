@@ -38,10 +38,10 @@ const FormModal = ({
     <Dialog open={openDialog ? true : false}>
       <DialogTrigger
         onClick={() => setOpenDialog(true)}
-        className="flex w-full cursor-pointer items-center gap-1 rounded py-[2%] pl-[5%] hover:bg-gray-100"
+        className="flex w-full cursor-pointer items-center gap-1 lg:gap-2 lg:border lg:py-[4%] rounded py-[2%] pl-[5%] hover:underline"
       >
-        <PlusCircle color="black" size={16} />
-        <span className="text-sm">Add Article</span>
+        <PlusCircle color="black" className="size-4" />
+        <span className="w-full text-sm lg:text-base lg:text-left">Add Article</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

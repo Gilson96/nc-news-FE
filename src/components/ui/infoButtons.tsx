@@ -8,28 +8,30 @@ import {
 import { toast } from "sonner";
 
 type InfoButtonsProps = {
-  author: string;
+  author?: string;
   votes: number;
-  count: number;
-  articleId?: number;
-  setUpdatedArticlesVotes: React.Dispatch<
-    React.SetStateAction<number | undefined>
-  >;
+  count?: number;
+  sectionId?: number;
+  setUpdatedVotes: React.Dispatch<React.SetStateAction<number | undefined>>;
+  section?: string;
 };
 
 const InfoButtons = ({
   author,
   count,
   votes,
-  articleId,
-  setUpdatedArticlesVotes,
+  sectionId,
+  setUpdatedVotes,
+  section,
 }: InfoButtonsProps) => {
   const incrementVotes = { votes: votes + 1 };
   const decrementVotes = { votes: votes - 1 };
 
   return (
     <>
-      <p className="flex w-auto items-center justify-center gap-1 rounded-full border p-[2%]">
+      <p
+        className={`${author?.length! === 0 || (author === undefined && "hidden")} flex w-auto items-center justify-center gap-1 rounded-full border p-[2%]`}
+      >
         <span>
           <User2 size={15} />
         </span>
@@ -41,11 +43,11 @@ const InfoButtons = ({
           onClick={() => {
             axios
               .patch(
-                `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}`,
+                `https://nc-news-api-99f5fdc34977.herokuapp.com/api/${section}/${sectionId}`,
                 incrementVotes,
               )
               .then(({ data }) => {
-                setUpdatedArticlesVotes(data.article.votes);
+                setUpdatedVotes(data.votes);
                 toast("Your vote has been given!");
               })
               .catch((err) => {
@@ -60,11 +62,11 @@ const InfoButtons = ({
           onClick={() => {
             axios
               .patch(
-                `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}`,
+                `https://nc-news-api-99f5fdc34977.herokuapp.com/api/${section}/${sectionId}`,
                 decrementVotes,
               )
               .then(({ data }) => {
-                setUpdatedArticlesVotes(data.article.votes);
+                setUpdatedVotes(data.votes);
                 toast("Your vote has been given!");
               })
               .catch((err) => {
@@ -75,7 +77,9 @@ const InfoButtons = ({
         />
         <span> {votes}</span>
       </p>
-      <p className="flex items-center justify-center gap-1 rounded-full border p-[2%]">
+      <p
+        className={`${count! < 0 || (count === undefined && "hidden")} flex items-center justify-center gap-1 rounded-full border p-[2%]`}
+      >
         <span>
           <MessageCircle size={15} />
         </span>

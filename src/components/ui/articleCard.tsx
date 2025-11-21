@@ -17,7 +17,7 @@ const ArticleCard = ({
           to={`/article/${article?.article_id}`}
           className="max-lg:hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pb-2"
         >
-          <h1 className="w-[80%] text-lg font-medium lg:w-[80%] lg:py-[3%] lg:text-sm">
+          <h1 className="w-[80%] text-lg font-medium lg:w-[80%] lg:py-[3%] lg:text-base">
             {article?.title}
           </h1>
           <p className="text-sm">{dateOnlyFormat(article.created_at)}</p>
