@@ -1,6 +1,6 @@
 # NCNews
 
-[Live Demo](https://nextbnb-psi.vercel.app) | [GitHub Repository](https://github.com/Gilson96/nextbnb)
+[Live Demo](https://ncnewsz.netlify.app)
 
 ---
 
