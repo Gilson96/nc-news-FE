@@ -6,7 +6,11 @@
 
 ## Overview
 
-**NCNews** is a social news aggregation app where users can browse articles, vote on them, and comment. This project is the frontend that interacts with a RESTful API to display articles, topics, comments, and a voting feature.
+In this small social news app, users can vote for an article, make a new article, read it, change it, or delete it. Users can also write comments on an article, see all comments for that article, they can vote for the comment or for the article, and the user can delete it.
+
+Users can also make a new topic. However, if the topic does not have any articles, it will be removed automatically. Users can navigate to other pages and see articles related to the topic. They can also sort the articles by date or by how many comments they have.
+
+
 
 ---
 
@@ -30,8 +34,15 @@
 * View a list of articles across different topics.
 * Filter articles by topic.
 * Sort articles by date or comment count.
-* View individual article pages.
+* View individual article pages with full details.
+* Create, edit, and delete your own articles.
 * Upvote and downvote articles.
+* See all articles grouped by their topic.
+* Create new topics.
+* Topics without articles are automatically deleted.
+* Read, post, and delete your own comments.
+* View all comments related to a specific article.
+* Upvote and downvote comments.
 * Read and Post comments.
 
 ---
