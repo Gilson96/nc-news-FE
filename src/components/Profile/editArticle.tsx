@@ -3,15 +3,18 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { useUpdateArticle } from "../../hooks/usePostActions";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import { useUpdateArticle } from "../../hooks/useUpdateActions";
 
-const EditArticle = ({ article_id }: { article_id: number }) => {
+type EditArticleProps = {
+  article_id: number;
+};
+
+const EditArticle = ({ article_id }: EditArticleProps) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const { errorSubmit, handleSubmit, setSuccessSubmit, successSubmit } =
-    useUpdateArticle(article_id);
+  const { handleSubmit } = useUpdateArticle(article_id);
 
   return (
     <AlertDialog open={openDialog ? true : false}>
@@ -19,7 +22,7 @@ const EditArticle = ({ article_id }: { article_id: number }) => {
         onClick={() => setOpenDialog(true)}
         className="cursor-pointer"
       >
-        <button className="button-[2%] h-[2rem] w-[4rem] rounded bg-gray-400 text-white">
+        <button className="button-[2%] h-8 w-16 cursor-pointer rounded bg-gray-400 text-white">
           Edit
         </button>
       </AlertDialogTrigger>
@@ -47,6 +50,7 @@ const EditArticle = ({ article_id }: { article_id: number }) => {
             </button>
             <button
               type="submit"
+              onClick={() => setOpenDialog(false)}
               className="cursor-pointer rounded-full border bg-sky-700 px-[4%] py-[1%] font-medium text-white max-md:relative"
             >
               Submit
