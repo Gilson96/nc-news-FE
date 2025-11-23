@@ -9,12 +9,7 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import {
-  useEffect,
-  useState,
-  type FormEvent,
-  type SetStateAction,
-} from "react";
+import { useState, type FormEvent, type SetStateAction } from "react";
 import { useGetTopics } from "../../hooks/useFetchActions";
 
 const FormModal = ({
