@@ -44,7 +44,7 @@ const ProfileMobileView = () => {
               <span>Loading articles</span>
             </p>
           ) : (
-            <ul className="h-full overflow-y-auto">
+            <>
               {articles?.filter((article) => article.author === "guest")
                 .length === 0 && (
                 <li className="flex flex-col place-items-center">
@@ -52,7 +52,7 @@ const ProfileMobileView = () => {
                   <p className="text-lg text-gray-500">No article created</p>
                 </li>
               )}
-              <li className="h-full">
+              <ul className="h-full overflow-y-auto">
                 {articles
                   ?.filter((article) => article.author === "guest")
                   .map((article) => (
@@ -63,8 +63,8 @@ const ProfileMobileView = () => {
                       </div>
                     </ArticleCard>
                   ))}
-              </li>
-            </ul>
+              </ul>
+            </>
           )}
         </DialogContent>
       </Dialog>
