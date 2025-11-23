@@ -47,6 +47,12 @@ Users can also make a new topic. However, if the topic does not have any article
 
 ---
 
+## Screenshot
+
+![Home Page](https://github.com/Gilson96/nc-news-FE/blob/master/src/assets/Screenshot.png?raw=true)
+
+---
+
 ## API Reference
 
 This project consumes the NCNews API.
