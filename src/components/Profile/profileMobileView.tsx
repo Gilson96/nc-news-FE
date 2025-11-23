@@ -28,13 +28,14 @@ const ProfileMobileView = () => {
           <UserCircle2 color="black" size={16} />
           <span className="text-sm">See profile</span>
         </DialogTrigger>
-        <DialogContent className="h-full max-h-[80%] overflow-hidden">
+        <DialogContent className="h-full max-h-[60%] overflow-hidden">
           <DialogHeader>
             <DialogTitle className="flex w-full items-center justify-between border-b pb-2 text-left">
               <p>Profile</p>
               <XCircle onClick={() => setOpenDialog(false)} />
             </DialogTitle>
           </DialogHeader>
+
           {isLoading ? (
             <p className="flex h-full w-full flex-col items-center justify-center">
               <span>
@@ -51,16 +52,18 @@ const ProfileMobileView = () => {
                   <p className="text-lg text-gray-500">No article created</p>
                 </li>
               )}
-              {articles
-                ?.filter((article) => article.author === "guest")
-                .map((article) => (
-                  <ArticleCard article={article}>
-                    <div className="flex items-center gap-2">
-                      <EditArticle article_id={article.article_id} />
-                      <DeleteArticle article_id={article.article_id} />
-                    </div>
-                  </ArticleCard>
-                ))}
+              <li className="h-full">
+                {articles
+                  ?.filter((article) => article.author === "guest")
+                  .map((article) => (
+                    <ArticleCard article={article}>
+                      <div className="flex items-center gap-2">
+                        <EditArticle article_id={article.article_id} />
+                        <DeleteArticle article_id={article.article_id} />
+                      </div>
+                    </ArticleCard>
+                  ))}
+              </li>
             </ul>
           )}
         </DialogContent>
