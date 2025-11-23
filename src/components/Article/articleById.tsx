@@ -5,7 +5,8 @@ import InfoButtons from "../ui/infoButtons";
 import Authors from "./authors";
 import Four0FourError from "../ErrorHandling/four0FourError";
 import { useGetArticleById } from "../../hooks/useFetchActions";
-import UploadImage from "./uploadImage";
+import { Image } from "lucide-react";
+import PostComments from "../Comments/postComments";
 
 const ArticleById = () => {
   const { article_id } = useParams();
@@ -23,7 +24,7 @@ const ArticleById = () => {
     return (
       <article className="flex w-full flex-col bg-white px-[3%] pt-[4%] lg:h-screen lg:flex-row lg:justify-between lg:gap-32 lg:overflow-hidden lg:p-0 lg:pt-12">
         <span className="lg:pt-[2%] lg:pl-[3%]">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 capitalize">
             <Authors article_author={article?.article.author} />
             <p
               className={`${isArticleLoading && "animate h-4 w-12 animate-pulse bg-gray-300"}`}
@@ -53,7 +54,11 @@ const ArticleById = () => {
             ) : (
               <>
                 {article?.article.article_img_url === null ? (
-                  <UploadImage />
+                  <div
+                    className={`flex h-60 w-full items-center justify-center rounded-xl bg-gray-300 md:h-80 lg:h-80 lg:w-120`}
+                  >
+                    <Image className="text-gray-500 lg:size-30" />
+                  </div>
                 ) : (
                   <img
                     className={`h-60 w-full rounded-xl md:h-80 lg:h-80`}
@@ -71,19 +76,33 @@ const ArticleById = () => {
                   article === undefined ? 0 : article?.article.article_id
                 }
                 author={article === undefined ? "n/a" : article?.article.author}
-                count={article === undefined ? 0 : article?.article.count}
+                count={article === undefined ? "0" : article?.article.count}
                 votes={article === undefined ? 0 : article?.article.votes}
                 section={"articles"}
               />
             </div>
 
             <span className="lg:hidden">
-              <Comments articleId={articleId} />
+              {article?.article.count === "0" ? (
+                <div className="flex flex-col gap-3">
+                  <h1 className="font-bold">Comments</h1>
+                  <PostComments articleId={article.article.article_id} />
+                </div>
+              ) : (
+                <Comments articleId={articleId} />
+              )}
             </span>
           </div>
         </span>
         <span className="max-lg:hidden lg:h-full lg:w-[40%] lg:overflow-y-auto lg:border lg:pt-[2%] lg:pr-[2%] lg:pl-[3%]">
-          <Comments articleId={articleId} />
+          {article?.article.count === "0" ? (
+            <div className="flex flex-col gap-3">
+              <h1 className="font-bold">Comments</h1>
+              <PostComments articleId={article.article.article_id} />
+            </div>
+          ) : (
+            <Comments articleId={articleId} />
+          )}
         </span>
       </article>
     );

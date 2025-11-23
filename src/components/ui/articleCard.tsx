@@ -2,13 +2,16 @@ import { type ReactNode } from "react";
 import type { Article } from "../../utils/dataTypes";
 import { Link } from "react-router";
 import { dateOnlyFormat } from "../../utils/timeFormat";
+import { Image } from "lucide-react";
 
 const ArticleCard = ({
   article,
   children,
+  imageSize,
 }: {
   article: Article;
   children?: ReactNode;
+  imageSize?: string;
 }) => {
   return (
     <article className="flex w-full flex-col border-b p-[2%] lg:p-0">
@@ -26,10 +29,16 @@ const ArticleCard = ({
           to={`/article/${article.article_id}`}
           className="max-xs:hidden w-[30%] lg:w-full"
         >
-          <img
-            className="h-24 w-24 rounded lg:h-[15rem] lg:w-[25rem] lg:place-self-center"
-            src={article.article_img_url}
-          />
+          {article.article_img_url === null ? (
+            <div className="flex h-24 w-24 items-center justify-center rounded bg-gray-300 lg:h-60 lg:w-100">
+              <Image className="text-gray-500 lg:size-30" />
+            </div>
+          ) : (
+            <img
+              className={`${imageSize?.length! > 0 ? imageSize : "lg:h-60 lg:w-100"} h-24 w-24 rounded lg:place-self-center`}
+              src={article.article_img_url}
+            />
+          )}
         </Link>
         <div className="flex w-full flex-col items-end gap-2 text-right">
           <Link

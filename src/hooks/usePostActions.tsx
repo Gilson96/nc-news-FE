@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export const usePostArticle = () => {
   const [successSubmit, setSuccessSubmit] = useState(false);
@@ -21,24 +22,26 @@ export const usePostArticle = () => {
         .post("https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics", {
           slug: newTopic,
         })
-        .then((response) => {
-          console.log(response);
-        })
         .then(() => {
           axios
             .post(
               "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
               sendArticle,
             )
-            .then((response) => {
+            .then(() => {
               setSuccessSubmit(true);
-              return response.data;
+              toast.success(`Your topic and article were sucessfully added!`, {
+                style: { backgroundColor: "lightgreen" },
+              });
             })
             .catch((err: AxiosError<{ msg: string }>) => {
               setErrorSubmit(err.response?.data.msg);
             });
         })
         .catch((err: AxiosError<{ msg: string }>) => {
+          toast.error(`Somenthing went wrong!`, {
+            style: { backgroundColor: "lightcoral" },
+          });
           setErrorSubmit(err.response?.data.msg);
         });
     } else {
@@ -47,72 +50,57 @@ export const usePostArticle = () => {
           "https://nc-news-api-99f5fdc34977.herokuapp.com/api/users/article",
           sendArticle,
         )
-        .then((response) => {
-          setSuccessSubmit(true);
-          return response.data;
+        .then(() => {
+           setSuccessSubmit(true);
+          toast.success(`Your article were sucessfully added!`, {
+            style: { backgroundColor: "lightgreen" },
+          });
         })
         .catch((err: AxiosError<{ msg: string }>) => {
+          toast.error(`Somenthing went wrong!`, {
+            style: { backgroundColor: "lightcoral" },
+          });
           setErrorSubmit(err.response?.data.msg);
         });
     }
   };
 
-  return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
+  return {
+    handleSubmit,
+    successSubmit,
+    errorSubmit,
+    setSuccessSubmit,
+    setErrorSubmit,
+  };
 };
 
-export const useUpdateArticle = (article_id: number) => {
-  const [successSubmit, setSuccessSubmit] = useState(false);
-  const [errorSubmit, setErrorSubmit] = useState<string>();
+export const usePostComment = (articleId: number, inputValue: string) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const articleData = Object.fromEntries(formData.entries());
-    const sendArticle = {
-      title: articleData.title,
+    const newComment = {
+      article_id: articleId,
+      body: inputValue,
+      votes: 0,
+      username: "guest",
     };
 
     axios
-      .patch(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${article_id}`,
-        sendArticle,
+      .post(
+        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}/comments`,
+        newComment,
       )
-      .then((response) => {
-        setSuccessSubmit(true);
-        return response.data;
+      .then(() => {
+        toast.success(`Your comment was sucessfully added!`, {
+          style: { backgroundColor: "lightgreen" },
+        });
       })
-      .catch((err: AxiosError<{ msg: string }>) => {
-        setErrorSubmit(err.response?.data.msg);
+      .catch((err) => {
+        console.log(err);
+        toast.error(`Somenthing went wrong!`, {
+          style: { backgroundColor: "lightcoral" },
+        });
       });
   };
-  return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
-};
-
-export const useUpdateComment = (comment_id: number) => {
-  const [successSubmit, setSuccessSubmit] = useState(false);
-  const [errorSubmit, setErrorSubmit] = useState<string>();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const articleData = Object.fromEntries(formData.entries());
-    const sendComment = {
-      body: articleData.body,
-      votes: articleData.votes,
-    };
-
-    axios
-      .patch(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/comments/${comment_id}`,
-        sendComment,
-      )
-      .then((response) => {
-        setSuccessSubmit(true);
-        return response.data;
-      })
-      .catch((err: AxiosError<{ msg: string }>) => {
-        setErrorSubmit(err.response?.data.msg);
-      });
-  };
-  return { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit };
+  return { handleSubmit };
 };

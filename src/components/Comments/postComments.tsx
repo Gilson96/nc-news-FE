@@ -1,41 +1,15 @@
-import axios from "axios";
 import { useState } from "react";
 import { ChevronRightCircleIcon } from "lucide-react";
-import { toast } from "sonner";
+import { usePostComment } from "../../hooks/usePostActions";
 
 type PostCommentsProps = {
   articleId: number;
 };
 
 const PostComments = ({ articleId }: PostCommentsProps) => {
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState("");
   const [openTextArea, setOpenTextArea] = useState(false);
-
-  const newComment = {
-    article_id: articleId,
-    body: inputValue,
-    votes: 0,
-    username: "guest",
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    axios
-      .post(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/articles/${articleId}/comments`,
-        newComment,
-      )
-      .then(() => {
-        setOpenTextArea(false);
-        toast(
-          `Your comment was sucessfully added!\nRefresh to see the comment`,
-          {},
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const { handleSubmit } = usePostComment(articleId, inputValue);
 
   return (
     <section className="flex w-full flex-col justify-end gap-1">

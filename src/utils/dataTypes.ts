@@ -6,7 +6,7 @@ export interface Article {
     created_at: string,
     votes: number,
     article_img_url: string,
-    count: number
+    count: string
 }
 
 export interface ArticleFilters {

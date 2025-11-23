@@ -1,7 +1,7 @@
-import FiltersSort from "./filters_sort";
+import FiltersSortInMobileView from "./filtersSortInMobileView";
 import type { HomeProps } from "./home";
 import FilterItem from "../ui/filterItem";
-import HomeOptions from "../Article/homeOptions";
+import HomeOptionsInMobileView from "../Article/homeOptionsInMobileView";
 import TopicsInFilters from "../Topic/topicsInFilters";
 import { useState } from "react";
 import useScreenSize from "../../hooks/useScreenSize";
@@ -22,8 +22,8 @@ const Filters = ({ setFilters }: FiltersProps) => {
         <TopicsInFilters setTopicsQuantity={setTopicsQuantity} />
       </ul>
       <span className="flex items-center gap-1 lg:hidden">
-        <FiltersSort setFilters={setFilters} />
-        <HomeOptions />
+        <FiltersSortInMobileView setFilters={setFilters} />
+        <HomeOptionsInMobileView />
       </span>
     </section>
   ) : (

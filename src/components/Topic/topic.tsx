@@ -1,23 +1,34 @@
 import { Link, useLocation } from "react-router";
-import { Loader2 } from "lucide-react";
+import { Image, Loader2 } from "lucide-react";
 import { dateOnlyFormat } from "../../utils/timeFormat";
 import InfoButtons from "../ui/infoButtons";
 import Four0FourError from "../ErrorHandling/four0FourError";
-import { useGetArticles } from "../../hooks/useFetchActions";
+import { useGetArticles, useGetTopics } from "../../hooks/useFetchActions";
 
 const Topic = () => {
   const { search } = useLocation();
   const topic = search;
-  const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
+  const { articles, isLoading, setUpdatedVotes } = useGetArticles(
     "",
     topic,
     "",
   );
-  // const allowedSearch = ["?topic=coding", "?topic=cooking", "?topic=football"];
+  const { topics, isLoading: topicIsLoading } = useGetTopics();
 
-  // if (!allowedSearch.includes(search)) {
-  //   return <Four0FourError />;
-  // }
+  if (topicIsLoading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Loader2 className="animate animate-spin" />
+        <p>Loading topic</p>
+      </div>
+    );
+  }
+
+  if (
+    topics?.find((topic) => topic.slug === search.slice(7))?.slug === undefined
+  ) {
+    return <Four0FourError />;
+  }
 
   return (
     <section className="flex h-full w-full items-center justify-center gap-2 bg-white">
@@ -46,12 +57,18 @@ const Topic = () => {
                     </Link>
                     <Link
                       to={`/article/${article.article_id}`}
-                      className="w-[30%] lg:w-full max-xs:hidden"
+                      className="max-xs:hidden w-[30%] lg:w-full"
                     >
-                      <img
-                        className="h-24 w-24 rounded lg:h-52 lg:w-[20rem]"
-                        src={article.article_img_url}
-                      />
+                      {article.article_img_url === null ? (
+                        <div className="flex h-24 w-24 items-center justify-center rounded bg-gray-300 lg:h-60 lg:w-100">
+                          <Image className="text-gray-500 lg:size-30" />
+                        </div>
+                      ) : (
+                        <img
+                          className="h-24 w-24 rounded lg:h-52 lg:w-[20rem]"
+                          src={article.article_img_url}
+                        />
+                      )}
                     </Link>
                     <div className="flex w-full flex-col items-end gap-2 text-right">
                       <Link
@@ -68,8 +85,9 @@ const Topic = () => {
                       </Link>
                       <div className="flex w-full items-center justify-end gap-3 text-sm lg:justify-start lg:py-[2%]">
                         <InfoButtons
-                          articleId={article.article_id}
-                          setUpdatedArticlesVotes={setUpdatedArticlesVotes}
+                          section="articles"
+                          sectionId={article.article_id}
+                          setUpdatedVotes={setUpdatedVotes}
                           author={article.author}
                           count={article.count}
                           votes={article.votes}

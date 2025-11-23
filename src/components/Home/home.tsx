@@ -19,7 +19,7 @@ const Home = () => {
   });
 
   return (
-    <main className="flex h-full w-full flex-col items-center justify-center border lg:mt-0 lg:h-screen lg:w-full lg:flex-row lg:items-start lg:place-self-center lg:overflow-hidden lg:pt-12">
+    <main className="flex h-full w-full flex-col items-center justify-center border lg:mt-0 lg:h-screen lg:w-full lg:flex-row lg:items-start lg:place-self-center lg:overflow-hidden lg:pt-[4%]">
       <Filters setFilters={setFilters} />
       <Articles
         sort_by={filters.sort_by}

@@ -11,26 +11,19 @@ import { useState } from "react";
 import ProfileMobileView from "../Profile/profileMobileView";
 
 const HomeOptions = () => {
-  const { handleSubmit, successSubmit, errorSubmit, setSuccessSubmit } =
-    usePostArticle();
+  const {
+    handleSubmit,
+    successSubmit,
+    errorSubmit,
+    setSuccessSubmit,
+    setErrorSubmit,
+  } = usePostArticle();
   const screenSize = useScreenSize();
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
     <>
-      {screenSize.width > 1024 ? (
-        <>
-          {" "}
-          <FormModal
-            openDialog={openDialog}
-            setOpenDialog={setOpenDialog}
-            setSuccessSubmit={setSuccessSubmit}
-            errorSubmit={errorSubmit}
-            successSubmit={successSubmit}
-            handleSubmit={handleSubmit}
-          />
-        </>
-      ) : (
+      {screenSize.width < 1024 && (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <EllipsisVertical
@@ -48,6 +41,7 @@ const HomeOptions = () => {
               errorSubmit={errorSubmit}
               successSubmit={successSubmit}
               handleSubmit={handleSubmit}
+              setErrorSubmit={setErrorSubmit}
             />
           </DropdownMenuContent>
         </DropdownMenu>

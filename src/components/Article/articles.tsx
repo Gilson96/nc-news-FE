@@ -5,7 +5,7 @@ import ArticleCard from "../ui/articleCard";
 import InfoButtons from "../ui/infoButtons";
 
 const Article = ({ sort_by, topic, order }: HomeProps) => {
-  const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
+  const { articles, isLoading, setUpdatedVotes } = useGetArticles(
     sort_by,
     topic,
     order,
@@ -21,7 +21,7 @@ const Article = ({ sort_by, topic, order }: HomeProps) => {
             <InfoButtons
               author={article.author}
               count={article.count}
-              setUpdatedVotes={setUpdatedArticlesVotes}
+              setUpdatedVotes={setUpdatedVotes}
               votes={article.votes}
               sectionId={article.article_id}
               section={"articles"}

@@ -4,26 +4,26 @@ import PostComments from "./postComments";
 import DeleteComments from "./deleteComments";
 import { useGetComments } from "../../hooks/useFetchActions";
 import InfoButtons from "../ui/infoButtons";
+import { useState } from "react";
 
 type CommentsProps = {
   articleId: number;
 };
 
 const Comments = ({ articleId }: CommentsProps) => {
-  const {
-    commentId,
-    comments,
-    isLoading,
-    setCommentId,
-    setSuccessDelete,
-    setUpdatedVotes,
-  } = useGetComments(articleId);
+  const [commentId, setCommentId] = useState<number | undefined>();
+  const { comments, isLoading, setSuccessDelete, setUpdatedVotes } =
+    useGetComments(articleId);
 
   return (
     <section className="flex flex-col gap-3">
       <h1 className="font-bold">Comments</h1>
+
       {isLoading ? (
-        <Loader2 className="animate animate-spin" />
+        <p>
+          <Loader2 className="animate animate-spin" />
+          <span>Loading comments</span>
+        </p>
       ) : (
         <div>
           <PostComments articleId={articleId} />
@@ -43,7 +43,7 @@ const Comments = ({ articleId }: CommentsProps) => {
                       }}
                     >
                       <DeleteComments
-                        commentId={commentId === undefined ? 0 : commentId}
+                        commentId={commentId}
                         setSuccessDelete={setSuccessDelete}
                       />
                     </span>

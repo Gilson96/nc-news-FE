@@ -10,7 +10,7 @@ import { toast } from "sonner";
 type InfoButtonsProps = {
   author?: string;
   votes: number;
-  count?: number;
+  count?: string;
   sectionId?: number;
   setUpdatedVotes: React.Dispatch<React.SetStateAction<number | undefined>>;
   section?: string;
@@ -78,7 +78,7 @@ const InfoButtons = ({
         <span> {votes}</span>
       </p>
       <p
-        className={`${count! < 0 || (count === undefined && "hidden")} flex items-center justify-center gap-1 rounded-full border p-[2%]`}
+        className={`${count! === "0" || (count === undefined && "hidden")} flex items-center justify-center gap-1 rounded-full border p-[2%]`}
       >
         <span>
           <MessageCircle size={15} />

@@ -14,11 +14,11 @@ export const useGetArticles = (
   order: string,
 ) => {
   const [articles, setArticles] = useState<Articles>();
-  const [updatedArticlesVotes, setUpdatedArticlesVotes] = useState<number>();
+  const [updatedVotes, setUpdatedVotes] = useState<number>();
   const [isLoading, setIsLoading] = useState(true);
 
-  sort_by = sort_by.length < 1 ? "" : `?sort_by=${sort_by}&`;
-  order = order.length < 1 ? "" : `order=${order}`;
+  sort_by = sort_by?.length < 1 ? "" : `?sort_by=${sort_by}&`;
+  order = order?.length < 1 ? "" : `order=${order}`;
   topic = topic === "all" ? "" : topic;
 
   useEffect(() => {
@@ -33,9 +33,13 @@ export const useGetArticles = (
       .catch(function (error) {
         console.log(error);
       });
-  }, [updatedArticlesVotes, sort_by, topic, order, articles]);
+  }, [updatedVotes, sort_by, topic, order, articles]);
 
-  return { articles, isLoading, setUpdatedArticlesVotes };
+  return {
+    articles,
+    isLoading,
+    setUpdatedVotes,
+  };
 };
 
 export const useGetArticleById = (article_id: number) => {
@@ -93,7 +97,6 @@ export const useGetAuthors = (article_author: string | undefined) => {
 
 export const useGetComments = (articleId: number) => {
   const [comments, setComments] = useState<CommentsArray>();
-  const [commentId, setCommentId] = useState<number>();
   const [successDelete, setSuccessDelete] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [updatedVotes, setUpdatedVotes] = useState<number>();
@@ -113,8 +116,6 @@ export const useGetComments = (articleId: number) => {
   }, [successDelete, comments, updatedVotes]);
 
   return {
-    commentId,
-    setCommentId,
     setSuccessDelete,
     isLoading,
     comments,
@@ -134,7 +135,25 @@ export const useGetTopics = () => {
         setTopics(response.data);
         return response;
       })
+      .then(() => {})
       .catch((err) => console.log(err));
+
+    const timeoutId = setTimeout(() => {
+      const emptyTopic = topics?.find((topic) => topic.count === "0")?.slug;
+
+      if (emptyTopic !== undefined) {
+        axios
+          .delete(
+            `https://nc-news-api-99f5fdc34977.herokuapp.com/api/topics/${emptyTopic}`,
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => console.log(err));
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
   }, [topics]);
 
   return { topics, isLoading };

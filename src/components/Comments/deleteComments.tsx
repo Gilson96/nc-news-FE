@@ -1,5 +1,3 @@
-import axios from "axios";
-import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,30 +11,15 @@ import {
 } from "../ui/alert-dialog";
 import { XCircle } from "lucide-react";
 import type { SetStateAction } from "react";
+import { useDeleteComment } from "../../hooks/useDeleteActions";
 
 type DeleteCommentsProps = {
-  commentId: number;
+  commentId: number | undefined;
   setSuccessDelete: React.Dispatch<SetStateAction<boolean>>;
 };
 
-const DeleteComments = ({
-  commentId,
-  setSuccessDelete,
-}: DeleteCommentsProps) => {
-  const handleDeleteComment = () => {
-    axios
-      .delete(
-        `https://nc-news-api-99f5fdc34977.herokuapp.com/api/comments/${commentId}`,
-      )
-      .then(() => {
-        toast("Your comment was sucessfully deleted", {});
-        setSuccessDelete(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+const DeleteComments = ({ commentId }: DeleteCommentsProps) => {
+  const { handleDeleteComment } = useDeleteComment(commentId);
   return (
     <AlertDialog>
       <AlertDialogTrigger className="cursor-pointer">

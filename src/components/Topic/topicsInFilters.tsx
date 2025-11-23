@@ -1,14 +1,12 @@
-import { useEffect, useState, type SetStateAction } from "react";
+import { useEffect, type SetStateAction } from "react";
 import { useGetTopics } from "../../hooks/useFetchActions";
 import { Link } from "react-router";
-import axios from "axios";
 
 type TopicsInFiltersProps = {
   setTopicsQuantity: React.Dispatch<SetStateAction<number>>;
 };
 
 const TopicsInFilters = ({ setTopicsQuantity }: TopicsInFiltersProps) => {
-  const [isTopicsEmpty, setIsTopicsEmpty] = useState(false);
   const { topics, isLoading } = useGetTopics();
 
   const queryTopics = (topic: string) => {
@@ -29,14 +27,16 @@ const TopicsInFilters = ({ setTopicsQuantity }: TopicsInFiltersProps) => {
     );
   }
 
-  return topics?.map((topic) => (
-    <Link
-      className="h-auto w-auto rounded border p-[2%] text-sm font-medium capitalize hover:bg-gray-100 lg:text-base lg:font-normal"
-      to={queryTopics(topic.slug)}
-    >
-      {topic.slug}
-    </Link>
-  ));
+  return topics
+    ?.filter((topic) => topic.count !== "0")
+    .map((topic) => (
+      <Link
+        className="h-auto w-auto rounded border p-[2%] text-sm font-medium capitalize hover:bg-gray-100 lg:text-base lg:font-normal"
+        to={queryTopics(topic.slug)}
+      >
+        {topic.slug}
+      </Link>
+    ));
 };
 
 export default TopicsInFilters;

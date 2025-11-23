@@ -9,7 +9,12 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { useState, type FormEvent, type SetStateAction } from "react";
+import {
+  useEffect,
+  useState,
+  type FormEvent,
+  type SetStateAction,
+} from "react";
 import { useGetTopics } from "../../hooks/useFetchActions";
 
 const FormModal = ({
@@ -17,12 +22,14 @@ const FormModal = ({
   successSubmit,
   setSuccessSubmit,
   errorSubmit,
+  setErrorSubmit,
   openDialog,
   setOpenDialog,
 }: {
   setSuccessSubmit: React.Dispatch<SetStateAction<boolean>>;
   successSubmit: boolean;
   errorSubmit: string | undefined;
+  setErrorSubmit: React.Dispatch<SetStateAction<string | undefined>>;
   openDialog: boolean;
   setOpenDialog: React.Dispatch<SetStateAction<boolean>>;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -32,16 +39,23 @@ const FormModal = ({
 
   if (successSubmit) {
     setOpenDialog(false);
+    setSuccessSubmit(false);
+  }
+
+  if (!openDialog) {
+    setErrorSubmit("");
   }
 
   return (
     <Dialog open={openDialog ? true : false}>
       <DialogTrigger
         onClick={() => setOpenDialog(true)}
-        className="flex w-full cursor-pointer items-center gap-1 lg:gap-2 lg:border lg:py-[4%] rounded py-[2%] pl-[5%] hover:underline"
+        className="flex w-full cursor-pointer items-center gap-1 rounded py-[2%] pl-[5%] hover:underline lg:gap-2 lg:border lg:py-[4%]"
       >
         <PlusCircle color="black" className="size-4" />
-        <span className="w-full text-sm lg:text-base lg:text-left">Add Article</span>
+        <span className="w-full text-sm lg:text-left lg:text-base">
+          Add Article
+        </span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -86,12 +100,14 @@ const FormModal = ({
                       </Label>
                     </div>
                   ) : (
-                    topics?.map((topic) => (
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value={topic.slug} id="r1" />
-                        <Label htmlFor="r1">{topic.slug}</Label>
-                      </div>
-                    ))
+                    topics
+                      ?.filter((topic) => topic.count !== "0")
+                      .map((topic) => (
+                        <div className="flex items-center gap-3">
+                          <RadioGroupItem value={topic.slug} id="r1" />
+                          <Label htmlFor="r1">{topic.slug}</Label>
+                        </div>
+                      ))
                   )}
                 </RadioGroup>
                 <p className="mt-[5%] mb-[2%] flex items-center justify-center gap-2">
@@ -134,16 +150,6 @@ const FormModal = ({
               </>
             )}
           </div>
-          {/* <div className="flex w-full items-center justify-start gap-2">
-              <Label>Image</Label>
-              <input
-                name="article_img_url"
-                type="file"
-                className="cursor-pointer"
-                accept="image/png, image/jpeg"
-              />
-            </div> */}
-
           <button
             type="submit"
             className="cursor-pointer place-self-end rounded-full border bg-sky-700 px-[4%] py-[1%] font-medium text-white max-md:relative"
