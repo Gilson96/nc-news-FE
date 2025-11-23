@@ -48,10 +48,15 @@ const InfoButtons = ({
               )
               .then(({ data }) => {
                 setUpdatedVotes(data.votes);
-                toast("Your vote has been given!");
+                toast.success("Your vote has been given!", {
+                  style: { backgroundColor: "lightgreen" },
+                });
               })
               .catch((err) => {
                 console.log(err);
+                toast.error("Something went wrong!", {
+                  style: { backgroundColor: "lightgreen" },
+                });
               });
           }}
           size={15}
@@ -67,10 +72,15 @@ const InfoButtons = ({
               )
               .then(({ data }) => {
                 setUpdatedVotes(data.votes);
-                toast("Your vote has been given!");
+                toast.success("Your vote has been given!", {
+                  style: { backgroundColor: "lightgreen" },
+                });
               })
               .catch((err) => {
                 console.log(err);
+                toast.error("Something went wrong!", {
+                  style: { backgroundColor: "lightgreen" },
+                });
               });
           }}
           size={15}
