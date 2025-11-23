@@ -16,11 +16,7 @@ import EditArticle from "./editArticle";
 const ProfileMobileView = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const screenSize = useScreenSize();
-  const { articles, isLoading, setUpdatedArticlesVotes } = useGetArticles(
-    "",
-    "",
-    "",
-  );
+  const { articles, isLoading } = useGetArticles("", "", "");
 
   return (
     screenSize.width < 1024 && (
@@ -32,7 +28,7 @@ const ProfileMobileView = () => {
           <UserCircle2 color="black" size={16} />
           <span className="text-sm">See profile</span>
         </DialogTrigger>
-        <DialogContent className="h-[80%] overflow-hidden">
+        <DialogContent className="h-full max-h-[80%] overflow-hidden">
           <DialogHeader>
             <DialogTitle className="flex w-full items-center justify-between border-b pb-2 text-left">
               <p>Profile</p>
@@ -47,7 +43,7 @@ const ProfileMobileView = () => {
               <span>Loading articles</span>
             </p>
           ) : (
-            <ul className="overflow-y-auto">
+            <ul className="h-full overflow-y-auto">
               {articles?.filter((article) => article.author === "guest")
                 .length === 0 && (
                 <li className="flex flex-col place-items-center">

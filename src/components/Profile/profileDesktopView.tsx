@@ -5,8 +5,13 @@ import { useState } from "react";
 import MyArticles from "./myArticles";
 
 const ProfileDesktopView = () => {
-  const { errorSubmit, handleSubmit, setSuccessSubmit, successSubmit } =
-    usePostArticle();
+  const {
+    errorSubmit,
+    handleSubmit,
+    setSuccessSubmit,
+    successSubmit,
+    setErrorSubmit,
+  } = usePostArticle();
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
@@ -15,7 +20,7 @@ const ProfileDesktopView = () => {
         <UserCircle2 size={50} />
         <h1 className="border-b text-lg font-medium">Guest</h1>
       </div>
-      <div className="flex flex-col gap-3 w-full pl-[3%]">
+      <div className="flex w-full flex-col gap-3 pl-[3%]">
         <FormModal
           errorSubmit={errorSubmit}
           successSubmit={successSubmit}
@@ -23,6 +28,7 @@ const ProfileDesktopView = () => {
           setSuccessSubmit={setSuccessSubmit}
           openDialog={openDialog}
           setOpenDialog={setOpenDialog}
+          setErrorSubmit={setErrorSubmit}
         />
 
         <MyArticles />
