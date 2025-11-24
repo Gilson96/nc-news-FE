@@ -55,7 +55,7 @@ const InfoButtons = ({
               .catch((err) => {
                 console.log(err);
                 toast.error("Something went wrong!", {
-                  style: { backgroundColor: "lightgreen" },
+                  style: { backgroundColor: "lightcoral" },
                 });
               });
           }}
@@ -79,7 +79,7 @@ const InfoButtons = ({
               .catch((err) => {
                 console.log(err);
                 toast.error("Something went wrong!", {
-                  style: { backgroundColor: "lightgreen" },
+                  style: { backgroundColor: "lightcoral" },
                 });
               });
           }}
