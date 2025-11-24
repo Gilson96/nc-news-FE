@@ -10,13 +10,9 @@ In this small social news app, users can vote for an article, make a new article
 
 Users can also make a new topic. However, if the topic does not have any articles, it will be removed automatically. Users can navigate to other pages and see articles related to the topic. They can also sort the articles by date or by how many comments they have.
 
-
-
 ---
 
 ## Technologies Used
-
-### Frontend
 
 * **React**
 * **React Router**
@@ -25,7 +21,6 @@ Users can also make a new topic. However, if the topic does not have any article
 * **Shadcn/UI**
 * **Axios (HTTP Requests)**
 * **Netlifly for deployment**
-
 
 ---
 
