@@ -6,9 +6,7 @@
 
 ## Overview
 
-In this small social news app, users can vote for an article, make a new article, read it, change it, or delete it. Users can also write comments on an article, see all comments for that article, they can vote for the comment or for the article, and the user can delete it.
-
-Users can also make a new topic. However, if the topic does not have any articles, it will be removed automatically. Users can navigate to other pages and see articles related to the topic. They can also sort the articles by date or by how many comments they have.
+In this small social news app where users can vote for an article, make a new article, read it, change it, or delete it. Users can also write comments on an article, see all comments for that article, vote for the comment or for the article, and the user can delete the comment. Users can also make a new topic. However, if the topic does not have any articles, it will be removed automatically. Users can navigate to other pages and see articles related to the topic. They can also sort the articles by date or by how many comments they have.
 
 ---
 
